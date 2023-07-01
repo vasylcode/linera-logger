@@ -31,16 +31,17 @@ linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" \
 publish-bytecode logger/target/wasm32-unknown-unknown/release/logger_{contract,service}.wasm
 linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" \
 publish-bytecode logging_fungible/target/wasm32-unknown-unknown/release/logging_fungible_{contract,service}.wasm
+linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" \
+create-application e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000001000000
 linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" wallet show
 ```
-the green chain (default chain of the wallet) should have 5 blocks because we published twice
-
-now copy the Owner field to the right of the green chain (paste where it says XXX)
+the green chain (default chain of the wallet) should have 6 blocks.
+now copy the Owner field to the right of the green chain (paste where it says XXX below)
 
 [linera commandline]:
 ```
 linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" \
 create-application e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65030000000000000000000000 \
 --json-argument '{"accounts":{"User:XXX": "10000."}}' \
---required-application-ids e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000001000000
+--required-application-ids e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000001000000e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65050000000000000000000000
 ```
