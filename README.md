@@ -35,7 +35,7 @@ linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" \
 create-application e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000001000000
 linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" wallet show
 ```
-the green chain (default chain of the wallet) should have 6 blocks. Try closing some tabs / applications if there are fewer.
+the green chain (default chain of the wallet) should have 6 as next block height. Try closing some tabs / applications if there are fewer.
 now copy the Owner field to the right of the green chain (paste where it says XXX below)
 
 [linera commandline]:
