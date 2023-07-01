@@ -15,6 +15,7 @@ use linera_sdk::{
 };
 use std::sync::Arc;
 use thiserror::Error;
+use log::info;
 
 linera_sdk::service!(LoggingFungibleToken);
 
@@ -34,6 +35,24 @@ impl Service for LoggingFungibleToken {
     ) -> Result<Response, Self::Error> {
         let schema = Schema::build(self.clone(), MutationRoot {}, EmptySubscription).finish();
         let response = schema.execute(request).await;
+        // if malformed somthing error:
+        info!("{}", response.data);
+        let help = if let async_graphql::Value::Object(map) = response.data.clone() {
+            map.values()
+                .filter_map(|value| {
+                    if let async_graphql::Value::List(list) = value {
+                        info!("henlo am list");
+                        Some(1)
+                    } else {
+                        info!("what the fuck");
+                        None
+                    }
+                })
+                .collect()
+        } else {
+            info!("???????????????????????????????");
+            vec![]
+        };
         Ok(response)
     }
 }

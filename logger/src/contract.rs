@@ -25,9 +25,10 @@ impl Contract for Logger {
 
     async fn initialize(
         &mut self,
-        _context: &OperationContext,
+        context: &OperationContext,
         _argument: (),
     ) -> Result<ExecutionResult<Self::Message>, Self::Error> {
+        self.log = linera_sdk::views::log_view::LogView::load(context).await.unwrap();
         Ok(ExecutionResult::default())
     }
 

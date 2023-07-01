@@ -150,6 +150,7 @@ use {
         test::{ActiveChain, TestValidator},
     },
 };
+use log::trace;
 
 // TODO(#768): Remove the derive macros.
 #[derive(Clone, Copy, Eq, PartialEq, Ord, PartialOrd, Hash, Debug, Serialize, Deserialize)]
@@ -157,7 +158,7 @@ pub struct LoggingFungibleTokenAbi;
 
 impl ContractAbi for LoggingFungibleTokenAbi {
     type InitializationArgument = InitialState;
-    type Parameters = ApplicationId<logger::LoggerAbi>;
+    type Parameters = Parameter;
     type ApplicationCall = ApplicationCall;
     type Operation = Operation;
     type Message = Message;
@@ -170,6 +171,11 @@ impl ServiceAbi for LoggingFungibleTokenAbi {
     type Query = Request;
     type QueryResponse = Response;
     type Parameters = ();
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Parameter {
+    pub logger: String,
 }
 
 /// An operation.

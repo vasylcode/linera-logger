@@ -16,8 +16,9 @@ use linera_sdk::{
     ApplicationCallResult, CalleeContext, Contract, ExecutionResult, MessageContext,
     OperationContext, SessionCallResult, ViewStateStorage,
 };
-use std::str::FromStr;
+use std::str::{FromStr, from_utf8, Utf8Error};
 use thiserror::Error;
+use log::{info};
 
 linera_sdk::contract!(LoggingFungibleToken);
 
@@ -55,7 +56,7 @@ impl Contract for LoggingFungibleToken {
     ) -> Result<ExecutionResult<Self::Message>, Self::Error> {
         self.call_application(true, Self::logger_id()?, &logger::LogStatement { 
             log_type: logger::LogType::OperationExecutionStart,
-            log: serde_json::to_string(&operation)?,
+            log: format!("{:?}", operation),
             app: linera_sdk::contract::system_api::current_application_id(),
         }, vec![]).await?;
         let res = match operation {
@@ -86,7 +87,7 @@ impl Contract for LoggingFungibleToken {
         };
         self.call_application(true, Self::logger_id()?, &logger::LogStatement { 
             log_type: logger::LogType::OperationExecutionEnd,
-            log: serde_json::to_string(&operation)?,
+            log: format!("{:?}", operation),
             app: linera_sdk::contract::system_api::current_application_id(),
         }, vec![]).await?;
         res
@@ -99,7 +100,7 @@ impl Contract for LoggingFungibleToken {
     ) -> Result<ExecutionResult<Self::Message>, Self::Error> {
         self.call_application(true, Self::logger_id()?, &logger::LogStatement { 
             log_type: logger::LogType::MessageExecutionStart,
-            log: serde_json::to_string(&message)?,
+            log: format!("{:?}", message),
             app: linera_sdk::contract::system_api::current_application_id(),
         }, vec![]).await?;
         let res = match message {
@@ -121,7 +122,7 @@ impl Contract for LoggingFungibleToken {
         };
         self.call_application(true, Self::logger_id()?, &logger::LogStatement { 
             log_type: logger::LogType::MessageExecutionEnd,
-            log: serde_json::to_string(&message)?,
+            log: format!("{:?}", message),
             app: linera_sdk::contract::system_api::current_application_id(),
         }, vec![]).await?;
         res
@@ -136,7 +137,7 @@ impl Contract for LoggingFungibleToken {
     {
         self.call_application(true, Self::logger_id()?, &logger::LogStatement { 
             log_type: logger::LogType::ApplicationCallHandleStart,
-            log: serde_json::to_string(&call)?,
+            log: format!("{:?}", call),
             app: linera_sdk::contract::system_api::current_application_id(),
         }, vec![]).await?;
         let res = match call {
@@ -182,7 +183,7 @@ impl Contract for LoggingFungibleToken {
         };
         self.call_application(true, Self::logger_id()?, &logger::LogStatement { 
             log_type: logger::LogType::ApplicationCallHandleEnd,
-            log: serde_json::to_string(&call)?,
+            log: format!("{:?}", call),
             app: linera_sdk::contract::system_api::current_application_id(),
         }, vec![]).await?;
         res
@@ -210,7 +211,7 @@ impl Contract for LoggingFungibleToken {
 
 impl LoggingFungibleToken {
     fn logger_id() -> Result<ApplicationId<logger::LoggerAbi>, Error> {
-        Self::parameters()
+        Ok(ApplicationId::from_str(&Self::parameters()?.logger).unwrap().with_abi::<logger::LoggerAbi>())
     }
     /// Verifies that a transfer is authenticated for this local account.
     fn check_account_authentication(
@@ -342,6 +343,9 @@ pub enum Error {
     BcsError(#[from] bcs::Error),
 
     /// Failed to deserialize JSON string
-    #[error("Failed to deserialize JSON string")]
+    #[error("Failed to serialize or deserialize JSON string")]
     JsonError(#[from] serde_json::Error),
+
+    #[error("how did u even get this utf8 error (parameter)")]
+    Utf8Error(#[from] Utf8Error),
 }

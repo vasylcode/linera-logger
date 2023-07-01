@@ -42,5 +42,3 @@ pub struct LogStatement {
     pub log: String,
     pub app: ApplicationId,
 }
-
-scalar!(LogStatement);
