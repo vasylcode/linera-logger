@@ -1,3 +1,0 @@
-cargo:rerun-if-changed=build/main.rs
-cargo:rustc-env=TYPENUM_BUILD_CONSTS=/mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/target/wasm32-unknown-unknown/release/build/typenum-8acbfb8c3676cd6f/out/consts.rs
-cargo:rustc-env=TYPENUM_BUILD_OP=/mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/target/wasm32-unknown-unknown/release/build/typenum-8acbfb8c3676cd6f/out/op.rs

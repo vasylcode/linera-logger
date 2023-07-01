@@ -1,1 +1,0 @@
-/mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/target/release/logging_fungible_contract: /mnt/d/PROJECTS/blockchain/linera_logger/logger/src/lib.rs /mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/src/contract.rs /mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/src/lib.rs /mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/src/state.rs
