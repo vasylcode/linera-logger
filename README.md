@@ -45,3 +45,18 @@ create-application e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16
 --json-argument '{"accounts":{"User:XXX": "10000."}}' \
 --required-application-ids e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000001000000e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65050000000000000000000000
 ```
+
+[linera service 1]:
+```
+cd linera protocol
+export LINERA_WALLET="$(realpath target/debug/wallet.json)"
+export LINERA_STORAGE="rocksdb:$(dirname "$LINERA_WALLET")/linera.db"
+linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" service --port 8080
+```
+[linera service 2]:
+```
+cd linera protocol
+export LINERA_WALLET_2="$(realpath target/debug/wallet_2.json)"
+export LINERA_STORAGE_2="rocksdb:$(dirname "$LINERA_WALLET_2")/linera.db"
+linera --wallet "$LINERA_WALLET_2" --storage "$LINERA_STORAGE_2" service --port 8081
+```
