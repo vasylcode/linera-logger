@@ -53,6 +53,21 @@ export LINERA_WALLET="$(realpath target/debug/wallet.json)"
 export LINERA_STORAGE="rocksdb:$(dirname "$LINERA_WALLET")/linera.db"
 linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" service --port 8080
 ```
+
+[frontend]:
+```
+cd linera_logger/logging_fungible/web-frontend
+npm install
+npm start
+```
+go to `http://localhost:3000/e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65030000000000000000000000e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65070000000000000000000000?owner=XXX&port=8080` where XXX is the previous owner ID. You should see 10000 in your balance.
+
+[linera commandline]:
+```
+linera --wallet "$LINERA_WALLET_2" --storage "$LINERA_STORAGE_2" wallet show
+```
+copy the owner field right to the green (only) chain to somewhere. 
+
 [linera service 2]:
 ```
 cd linera-protocol
@@ -60,9 +75,8 @@ export LINERA_WALLET_2="$(realpath target/debug/wallet_2.json)"
 export LINERA_STORAGE_2="rocksdb:$(dirname "$LINERA_WALLET_2")/linera_2.db"
 linera --wallet "$LINERA_WALLET_2" --storage "$LINERA_STORAGE_2" service --port 8081
 ```
-[frontend]:
-```
-cd linera_logger/logging_fungible/web-frontend
-npm install
-npm start
-```
+Open another tab `http://localhost:3000/e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65030000000000000000000000e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65070000000000000000000000?owner=XXX2&port=8081` where XXX2 is the one you just copied.
+
+It should say failed to pull balance because the application is only deployed when a message is sent (after you transfer some money).
+
+Go back to the first tab opened (where it says 10000): enter chain id 1db1936dad0717597a7743a8353c9c0191c14c3a129b258e9743aec2b4f05d03, which is the green chain in the second wallet and enter owner XXX2 and transfer some money, lets say 100.
