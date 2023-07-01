@@ -1,0 +1,1 @@
+/mnt/d/PROJECTS/blockchain/linera_logger/logger/target/wasm32-unknown-unknown/release/logger_contract.wasm: /mnt/d/PROJECTS/blockchain/linera_logger/logger/src/contract.rs /mnt/d/PROJECTS/blockchain/linera_logger/logger/src/lib.rs /mnt/d/PROJECTS/blockchain/linera_logger/logger/src/state.rs
