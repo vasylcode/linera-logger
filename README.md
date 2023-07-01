@@ -40,7 +40,7 @@ now copy the Owner field to the right of the green chain (paste where it says XX
 [linera commandline]:
 ```
 linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" \
-create-application e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000001000000 \
+create-application e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65030000000000000000000000 \
 --json-argument '{"accounts":{"User:XXX": "10000."}}' \
---required-application-ids e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65030000000000000000000000
+--required-application-ids e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000001000000
 ```
