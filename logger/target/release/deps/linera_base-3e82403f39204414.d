@@ -1,0 +1,12 @@
+/mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/deps/linera_base-3e82403f39204414.rmeta: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/abi.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/crypto.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/data_types.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/graphql.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/identifiers.rs
+
+/mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/deps/liblinera_base-3e82403f39204414.rlib: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/abi.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/crypto.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/data_types.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/graphql.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/identifiers.rs
+
+/mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/deps/linera_base-3e82403f39204414.d: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/abi.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/crypto.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/data_types.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/graphql.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/identifiers.rs
+
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/lib.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/abi.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/crypto.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/data_types.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/graphql.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/linera-base-0.2.0/src/identifiers.rs:

@@ -1,0 +1,3 @@
+cargo:rerun-if-changed=build/main.rs
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=D:\PROJECTS\blockchain\linera_logger\logger\target\wasm32-unknown-unknown\release\build\typenum-9360e3405e90668c\out\consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=D:\PROJECTS\blockchain\linera_logger\logger\target\wasm32-unknown-unknown\release\build\typenum-9360e3405e90668c\out\op.rs

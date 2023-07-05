@@ -824,6 +824,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "find-crate"
+version = "0.6.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "59a98bbaacea1c0eb6a0876280051b892eb73594fd90cf3b20e9c817029c57d2"
+dependencies = [
+ "toml 0.5.11",
+]
+
+[[package]]
 name = "fnv"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1603,18 +1612,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "logger_macro"
+version = "0.1.0"
+
+[[package]]
 name = "logging_fungible"
 version = "0.1.0"
 dependencies = [
  "async-graphql",
  "async-trait",
  "bcs",
+ "find-crate",
  "futures",
  "linera-base",
  "linera-sdk",
  "linera-views",
  "log",
  "logger",
+ "logger_macro",
  "serde",
  "serde_json",
  "thiserror",

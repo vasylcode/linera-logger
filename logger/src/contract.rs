@@ -11,6 +11,7 @@ use linera_sdk::{
 };
 use thiserror::Error;
 use logger::LogStatement;
+use linera_sdk::views::views::View;
 
 linera_sdk::contract!(Logger);
 
@@ -25,10 +26,10 @@ impl Contract for Logger {
 
     async fn initialize(
         &mut self,
-        context: &OperationContext,
+        _context: &OperationContext,
         _argument: (),
     ) -> Result<ExecutionResult<Self::Message>, Self::Error> {
-        self.log = linera_sdk::views::log_view::LogView::load(context).await.unwrap();
+        //self.log = linera_sdk::views::log_view::LogView::load(context).await.unwrap();
         Ok(ExecutionResult::default())
     }
 

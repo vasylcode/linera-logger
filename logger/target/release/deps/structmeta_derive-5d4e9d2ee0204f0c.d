@@ -1,0 +1,10 @@
+/mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/deps/libstructmeta_derive-5d4e9d2ee0204f0c.so: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/syn_utils.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/parse.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/struct_meta.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/to_tokens.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/to_tokens_attribute.rs
+
+/mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/deps/structmeta_derive-5d4e9d2ee0204f0c.d: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/syn_utils.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/parse.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/struct_meta.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/to_tokens.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/to_tokens_attribute.rs
+
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/lib.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/syn_utils.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/parse.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/struct_meta.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/to_tokens.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/to_tokens_attribute.rs:

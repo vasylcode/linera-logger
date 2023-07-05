@@ -1,0 +1,13 @@
+Writing generated file: /mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/build/cranelift-codegen-81729205c1dfd8a2/out/settings.rs
+Writing generated file: /mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/build/cranelift-codegen-81729205c1dfd8a2/out/types.rs
+Writing generated file: /mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/build/cranelift-codegen-81729205c1dfd8a2/out/opcodes.rs
+Writing generated file: /mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/build/cranelift-codegen-81729205c1dfd8a2/out/clif.isle
+Writing generated file: /mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/build/cranelift-codegen-81729205c1dfd8a2/out/inst_builder.rs
+Writing generated file: /mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/build/cranelift-codegen-81729205c1dfd8a2/out/settings-x86.rs
+Rebuilding /mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/build/cranelift-codegen-81729205c1dfd8a2/out/isle_x64.rs
+Writing ISLE-generated Rust code to /mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/build/cranelift-codegen-81729205c1dfd8a2/out/isle_x64.rs
+Rebuilding /mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/build/cranelift-codegen-81729205c1dfd8a2/out/isle_aarch64.rs
+Writing ISLE-generated Rust code to /mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/build/cranelift-codegen-81729205c1dfd8a2/out/isle_aarch64.rs
+Rebuilding /mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/build/cranelift-codegen-81729205c1dfd8a2/out/isle_s390x.rs
+Writing ISLE-generated Rust code to /mnt/d/PROJECTS/blockchain/linera_logger/logger/target/release/build/cranelift-codegen-81729205c1dfd8a2/out/isle_s390x.rs
+fatal: not a git repository (or any of the parent directories): .git

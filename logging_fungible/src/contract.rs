@@ -19,6 +19,7 @@ use linera_sdk::{
 use std::str::{FromStr, from_utf8, Utf8Error};
 use thiserror::Error;
 use log::{info};
+use logger_macro::*;
 
 linera_sdk::contract!(LoggingFungibleToken);
 
@@ -31,6 +32,7 @@ impl Contract for LoggingFungibleToken {
     type Error = Error;
     type Storage = ViewStateStorage<Self>;
 
+    #[initialize(Self::logger_id()?)]
     async fn initialize(
         &mut self,
         context: &OperationContext,
@@ -49,16 +51,12 @@ impl Contract for LoggingFungibleToken {
         Ok(ExecutionResult::default())
     }
 
+    #[execute_operation(Self::logger_id()?)]
     async fn execute_operation(
         &mut self,
         context: &OperationContext,
         operation: Self::Operation,
     ) -> Result<ExecutionResult<Self::Message>, Self::Error> {
-        self.call_application(true, Self::logger_id()?, &logger::LogStatement { 
-            log_type: logger::LogType::OperationExecutionStart,
-            log: format!("{:?}", operation),
-            app: linera_sdk::contract::system_api::current_application_id(),
-        }, vec![]).await?;
         let res = match operation {
             Operation::Transfer {
                 owner,
@@ -85,24 +83,15 @@ impl Contract for LoggingFungibleToken {
                 self.claim(source_account, amount, target_account).await
             }
         };
-        self.call_application(true, Self::logger_id()?, &logger::LogStatement { 
-            log_type: logger::LogType::OperationExecutionEnd,
-            log: format!("{:?}", operation),
-            app: linera_sdk::contract::system_api::current_application_id(),
-        }, vec![]).await?;
         res
     }
-
+    
+    #[execute_message(Self::logger_id()?)]
     async fn execute_message(
         &mut self,
         context: &MessageContext,
         message: Message,
     ) -> Result<ExecutionResult<Self::Message>, Self::Error> {
-        self.call_application(true, Self::logger_id()?, &logger::LogStatement { 
-            log_type: logger::LogType::MessageExecutionStart,
-            log: format!("{:?}", message),
-            app: linera_sdk::contract::system_api::current_application_id(),
-        }, vec![]).await?;
         let res = match message {
             Message::Credit { owner, amount } => {
                 self.credit(owner, amount).await;
@@ -120,14 +109,10 @@ impl Contract for LoggingFungibleToken {
                     .await)
             }
         };
-        self.call_application(true, Self::logger_id()?, &logger::LogStatement { 
-            log_type: logger::LogType::MessageExecutionEnd,
-            log: format!("{:?}", message),
-            app: linera_sdk::contract::system_api::current_application_id(),
-        }, vec![]).await?;
         res
     }
 
+    #[handle_application_call(Self::logger_id()?)]
     async fn handle_application_call(
         &mut self,
         context: &CalleeContext,
@@ -135,11 +120,6 @@ impl Contract for LoggingFungibleToken {
         _forwarded_sessions: Vec<SessionId>,
     ) -> Result<ApplicationCallResult<Self::Message, Self::Response, Self::SessionState>, Self::Error>
     {
-        self.call_application(true, Self::logger_id()?, &logger::LogStatement { 
-            log_type: logger::LogType::ApplicationCallHandleStart,
-            log: format!("{:?}", call),
-            app: linera_sdk::contract::system_api::current_application_id(),
-        }, vec![]).await?;
         let res = match call {
             ApplicationCall::Balance { owner } => {
                 let mut result = ApplicationCallResult::default();
@@ -181,14 +161,10 @@ impl Contract for LoggingFungibleToken {
                 })
             }
         };
-        self.call_application(true, Self::logger_id()?, &logger::LogStatement { 
-            log_type: logger::LogType::ApplicationCallHandleEnd,
-            log: format!("{:?}", call),
-            app: linera_sdk::contract::system_api::current_application_id(),
-        }, vec![]).await?;
         res
     }
 
+    #[handle_session_call(Self::logger_id()?)]
     async fn handle_session_call(
         &mut self,
         _context: &CalleeContext,
@@ -348,4 +324,7 @@ pub enum Error {
 
     #[error("how did u even get this utf8 error (parameter)")]
     Utf8Error(#[from] Utf8Error),
+
+    #[error("ur crate weird")]
+    FindCrateError(#[from] find_crate::Error),
 }

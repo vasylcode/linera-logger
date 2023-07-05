@@ -14,8 +14,10 @@ serde = { version = "1.0.130", features = ["derive"] }
 serde_json = { version = "1.0.93", features = ["std"] }
 thiserror = "1.0.31"
 logger = { path = "../logger" }
+logger_macro = { path = "../logger_macro" }
 log = "0.4.19"
 linera-base = "0.2.0"
+find-crate = "0.6.3"
 
 [dev-dependencies]
 linera-sdk = { version = "0.2.0", features = ["test"] }
