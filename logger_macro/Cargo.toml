@@ -7,3 +7,6 @@ edition = "2021"
 proc-macro = true
 
 [dependencies]
+find-crate = "0.6.3"
+proc-macro2 = "1.0.63"
+quote = "1.0.29"

@@ -1614,6 +1614,11 @@ dependencies = [
 [[package]]
 name = "logger_macro"
 version = "0.1.0"
+dependencies = [
+ "find-crate",
+ "proc-macro2",
+ "quote",
+]
 
 [[package]]
 name = "logging_fungible"

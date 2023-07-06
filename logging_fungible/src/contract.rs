@@ -319,12 +319,15 @@ pub enum Error {
     BcsError(#[from] bcs::Error),
 
     /// Failed to deserialize JSON string
-    #[error("Failed to serialize or deserialize JSON string")]
+    #[error("Failed to serialize or deserialize JSON string bruh")]
     JsonError(#[from] serde_json::Error),
 
     #[error("how did u even get this utf8 error (parameter)")]
     Utf8Error(#[from] Utf8Error),
 
-    #[error("ur crate weird")]
+    #[error("ur crate weird {0}")]
     FindCrateError(#[from] find_crate::Error),
+
+    #[error("aaaaaaaaaaaaaaaaaaaaaaa")]
+    MyError,
 }

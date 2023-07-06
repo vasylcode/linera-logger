@@ -1,6 +1,14 @@
 extern crate proc_macro;
 use proc_macro::*;
 use std::str::FromStr;
+use find_crate::find_crate;
+use quote::quote;
+
+fn import() -> proc_macro2::TokenStream {
+    let name = find_crate(|_s| true).unwrap().name;
+    let name = proc_macro2::Ident::new(&name, proc_macro2::Span::call_site());
+    quote!("#name".to_string())
+}
 
 #[proc_macro_attribute]
 pub fn initialize(input: TokenStream, anno: TokenStream) -> TokenStream {
@@ -37,11 +45,12 @@ pub fn initialize(input: TokenStream, anno: TokenStream) -> TokenStream {
                     start1 = TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::from_iter(vs.into_iter()))).into();
                     let start2 = TokenStream::from_str(r#";
                         let __a = linera_sdk::contract::system_api::current_application_id();
-                        let __i ="#).unwrap();
+                        let __i = "#).unwrap();
                     let start3 = TokenStream::from_str(r#";
-                        let __n = find_crate::find_crate(|s| true)?.name;
+                        let __n = "#).unwrap();
+                    let start4 = TokenStream::from_str(r#";
                         let __b = "#).unwrap();
-                    let start4 = TokenStream::from_str(r#".height;
+                    let start5 = TokenStream::from_str(r#".height;
                         __self.call_application(true, __i, &logger::LogStatement {
                             log_type: logger::LogType::InitializationStart,
                             log: __l.clone(),
@@ -69,8 +78,10 @@ pub fn initialize(input: TokenStream, anno: TokenStream) -> TokenStream {
                     replacement.extend(start2.into_iter());
                     replacement.extend(input.clone().into_iter());
                     replacement.extend(start3.into_iter());
-                    replacement.extend(vec![names[0].clone()].into_iter());
+                    replacement.extend(Into::<TokenStream>::into(import()));
                     replacement.extend(start4.into_iter());
+                    replacement.extend(vec![names[0].clone()].into_iter());
+                    replacement.extend(start5.into_iter());
                     replacement.extend(vec![code].into_iter());
                     replacement.extend(end.into_iter());
                     v[len - 5] = TokenTree::Group(Group::new(Delimiter::Brace, replacement));
