@@ -134,9 +134,10 @@ pub fn execute_operation(input: TokenStream, anno: TokenStream) -> TokenStream {
                         let __a = linera_sdk::contract::system_api::current_application_id();
                         let __i ="#).unwrap();
                     let start3 = TokenStream::from_str(r#";
-                        let __n = find_crate::find_crate(|s| true)?.name;
+                        let __n = "#).unwrap();
+                    let start4 = TokenStream::from_str(r#";
                         let __b = "#).unwrap();
-                    let start4 = TokenStream::from_str(r#".height;
+                    let start5 = TokenStream::from_str(r#".height;
                         __self.call_application(true, __i, &logger::LogStatement {
                             log_type: logger::LogType::OperationExecutionStart,
                             log: __l.clone(),
@@ -164,8 +165,10 @@ pub fn execute_operation(input: TokenStream, anno: TokenStream) -> TokenStream {
                     replacement.extend(start2.into_iter());
                     replacement.extend(input.clone().into_iter());
                     replacement.extend(start3.into_iter());
-                    replacement.extend(vec![names[0].clone()].into_iter());
+                    replacement.extend(Into::<TokenStream>::into(import()));
                     replacement.extend(start4.into_iter());
+                    replacement.extend(vec![names[0].clone()].into_iter());
+                    replacement.extend(start5.into_iter());
                     replacement.extend(vec![code].into_iter());
                     replacement.extend(end.into_iter());
                     v[len - 5] = TokenTree::Group(Group::new(Delimiter::Brace, replacement));
@@ -219,13 +222,14 @@ pub fn execute_message(input: TokenStream, anno: TokenStream) -> TokenStream {
                         let __a = linera_sdk::contract::system_api::current_application_id();
                         let __i ="#).unwrap();
                     let start3 = TokenStream::from_str(r#";
-                        let __n = find_crate::find_crate(|s| true)?.name;
+                        let __n = "#).unwrap();
+                    let start4 = TokenStream::from_str(r#";
                         let __b = "#).unwrap();
-                    let start4 = TokenStream::from_str(r#".height;
+                    let start5 = TokenStream::from_str(r#".height;
                         let __o = "#).unwrap();
-                    let start5 = TokenStream::from_str(r#".message_id.chain_id;
+                    let start6 = TokenStream::from_str(r#".message_id.chain_id;
                         let __f = "#).unwrap();
-                    let start6 = TokenStream::from_str(r#".message_id.height;
+                    let start7 = TokenStream::from_str(r#".message_id.height;
                         __self.call_application(true, __i, &logger::LogStatement {
                             log_type: logger::LogType::MessageExecutionStart,
                             log: __l.clone(),
@@ -253,12 +257,14 @@ pub fn execute_message(input: TokenStream, anno: TokenStream) -> TokenStream {
                     replacement.extend(start2.into_iter());
                     replacement.extend(input.clone().into_iter());
                     replacement.extend(start3.into_iter());
-                    replacement.extend(vec![names[0].clone()].into_iter());
+                    replacement.extend(Into::<TokenStream>::into(import()));
                     replacement.extend(start4.into_iter());
                     replacement.extend(vec![names[0].clone()].into_iter());
                     replacement.extend(start5.into_iter());
                     replacement.extend(vec![names[0].clone()].into_iter());
                     replacement.extend(start6.into_iter());
+                    replacement.extend(vec![names[0].clone()].into_iter());
+                    replacement.extend(start7.into_iter());
                     replacement.extend(vec![code].into_iter());
                     replacement.extend(end.into_iter());
                     v[len - 5] = TokenTree::Group(Group::new(Delimiter::Brace, replacement));
@@ -311,7 +317,8 @@ pub fn handle_application_call(input: TokenStream, anno: TokenStream) -> TokenSt
                         let __a = linera_sdk::contract::system_api::current_application_id();
                         let __i ="#).unwrap();
                     let start3 = TokenStream::from_str(r#";
-                        let __n = find_crate::find_crate(|s| true)?.name;
+                        let __n = "#).unwrap();
+                    let start4 = TokenStream::from_str(r#";
                         __self.call_application(true, __i, &logger::LogStatement {
                             log_type: logger::LogType::ApplicationCallHandleStart,
                             log: __l.clone(),
@@ -339,6 +346,8 @@ pub fn handle_application_call(input: TokenStream, anno: TokenStream) -> TokenSt
                     replacement.extend(start2.into_iter());
                     replacement.extend(input.clone().into_iter());
                     replacement.extend(start3.into_iter());
+                    replacement.extend(Into::<TokenStream>::into(import()));
+                    replacement.extend(start4.into_iter());
                     replacement.extend(vec![code].into_iter());
                     replacement.extend(end.into_iter());
                     v[len - 5] = TokenTree::Group(Group::new(Delimiter::Brace, replacement));
@@ -391,7 +400,8 @@ pub fn handle_session_call(input: TokenStream, anno: TokenStream) -> TokenStream
                         let __a = linera_sdk::contract::system_api::current_application_id();
                         let __i ="#).unwrap();
                     let start3 = TokenStream::from_str(r#";
-                        let __n = find_crate::find_crate(|s| true)?.name;
+                        let __n = "#).unwrap();
+                    let start4 = TokenStream::from_str(r#";
                         __self.call_application(true, __i, &logger::LogStatement {
                             log_type: logger::LogType::SessionCallHandleStart,
                             log: __l.clone(),
@@ -419,6 +429,8 @@ pub fn handle_session_call(input: TokenStream, anno: TokenStream) -> TokenStream
                     replacement.extend(start2.into_iter());
                     replacement.extend(input.clone().into_iter());
                     replacement.extend(start3.into_iter());
+                    replacement.extend(Into::<TokenStream>::into(import()));
+                    replacement.extend(start4.into_iter());
                     replacement.extend(vec![code].into_iter());
                     replacement.extend(end.into_iter());
                     v[len - 5] = TokenTree::Group(Group::new(Delimiter::Brace, replacement));
