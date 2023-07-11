@@ -8,5 +8,6 @@ proc-macro = true
 
 [dependencies]
 find-crate = "0.6.3"
+itertools = "0.11.0"
 proc-macro2 = "1.0.63"
-quote = "1.0.29"
+toml = "0.7.6"

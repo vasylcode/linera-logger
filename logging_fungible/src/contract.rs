@@ -94,6 +94,7 @@ impl Contract for LoggingFungibleToken {
     ) -> Result<ExecutionResult<Self::Message>, Self::Error> {
         let res = match message {
             Message::Credit { owner, amount } => {
+                info!("{}", amount);
                 self.credit(owner, amount).await;
                 Ok(ExecutionResult::default())
             }
@@ -187,7 +188,15 @@ impl Contract for LoggingFungibleToken {
 
 impl LoggingFungibleToken {
     fn logger_id() -> Result<ApplicationId<logger::LoggerAbi>, Error> {
-        Ok(ApplicationId::from_str(&Self::parameters()?.logger).unwrap().with_abi::<logger::LoggerAbi>())
+        /*for app_id in system_api::required_application_ids() {
+            info!("{}", bcs::to_bytes(&app_id.bytecode_id)?.into_iter().map(|b| format!("{:0>2x}", b)).collect::<String>());
+            info!("{}", Self::parameters()?.serialized_logger_bytecode_id);
+            if bcs::to_bytes(&app_id.bytecode_id)?.into_iter().map(|b| format!("{:0>2x}", b)).collect::<String>() == Self::parameters()?.serialized_logger_bytecode_id { 
+                return Ok(app_id.with_abi::<logger::LoggerAbi>()); 
+            }
+        }
+        return Err(Error::NoRequiredIdsError);*/
+        Ok(bcs::from_bytes::<ApplicationId>(&hex::decode(Self::parameters()?.logger_application_id)?)?.with_abi::<logger::LoggerAbi>())
     }
     /// Verifies that a transfer is authenticated for this local account.
     fn check_account_authentication(
@@ -220,6 +229,7 @@ impl LoggingFungibleToken {
     }
 
     /// Handles a transfer from a session.
+    #[function(Self::logger_id()?)]
     async fn handle_session_transfer(
         &mut self,
         mut balance: Amount,
@@ -240,6 +250,7 @@ impl LoggingFungibleToken {
         })
     }
 
+    #[function(Self::logger_id()?)]
     async fn claim(
         &mut self,
         source_account: Account,
@@ -319,7 +330,7 @@ pub enum Error {
     BcsError(#[from] bcs::Error),
 
     /// Failed to deserialize JSON string
-    #[error("Failed to serialize or deserialize JSON string bruh")]
+    #[error("Failed to serialize or deserialize JSON string bruh {0}")]
     JsonError(#[from] serde_json::Error),
 
     #[error("how did u even get this utf8 error (parameter)")]
@@ -328,6 +339,21 @@ pub enum Error {
     #[error("ur crate weird {0}")]
     FindCrateError(#[from] find_crate::Error),
 
+    #[error("hecks {0}")]
+    HexError(#[from] hex::FromHexError),
+
+    #[error("cannot read ur toml {0}")]
+    IoError(#[from] std::io::Error),
+
+    #[error("cannot deserialize ur toml {0}")]
+    TomlDeError(#[from] toml::de::Error),
+
     #[error("aaaaaaaaaaaaaaaaaaaaaaa")]
-    MyError,
+    NoRequiredIdsError,
+
+    #[error("wheres ur manifest dir")]
+    NotFoundManifestDir,
+
+    #[error("wheres ur crate name in cargo.toml bruh")]
+    NoNameInCargoToml
 }

@@ -102,14 +102,14 @@ LINERA_STORAGE_2=rocksdb:$(dirname "$LINERA_WALLET_2")/linera_2.db
 
 cd ../../../linera_logger
 
+
 LOGGER_BYTECODE_ID=$(linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" publish-bytecode logger/target/wasm32-unknown-unknown/release/logger_{contract,service}.wasm)
+sleep 30
 FUNGIBLE_BYTECODE_ID=$(linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" publish-bytecode logging_fungible/target/wasm32-unknown-unknown/release/logging_fungible_{contract,service}.wasm)
-echo "wait for like 10 seconds"
-read
+sleep 10
 LOGGER_APPLICATION_ID=$(linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" create-application "$LOGGER_BYTECODE_ID")
-echo "wait for like 10 seconds"
-read
-FUNGIBLE_APPLICATION_ID=$(linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" create-application "$FUNGIBLE_BYTECODE_ID" --json-argument "{\"accounts\":{\"User:$WALLET_ONE_DEFAULT_OWNER\":\"10000.\"}}" --json-parameters "{\"logger\":\"${LOGGER_APPLICATION_ID}\"}" --required-application-ids "$LOGGER_APPLICATION_ID")
+sleep 10
+FUNGIBLE_APPLICATION_ID=$(linera --wallet "$LINERA_WALLET" --storage "$LINERA_STORAGE" create-application "$FUNGIBLE_BYTECODE_ID" --json-argument "{\"accounts\":{\"User:$WALLET_ONE_DEFAULT_OWNER\":\"10000.\"}}" --json-parameters "{\"logger_application_id\":\"${LOGGER_APPLICATION_ID}\"}" --required-application-ids "$LOGGER_APPLICATION_ID")
 
 echo "open three consoles: run a service for each wallet and start the frontend; press enter to proceed"
 

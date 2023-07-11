@@ -138,7 +138,7 @@
 //! automatically update.
 
 use async_graphql::{scalar, InputObject, Request, Response};
-use linera_sdk::base::{Amount, ApplicationId, ChainId, ContractAbi, Owner, ServiceAbi};
+use linera_sdk::base::{Amount, ApplicationId, ChainId, ContractAbi, Owner, ServiceAbi, BytecodeId};
 use serde::{de::Error, Deserialize, Deserializer, Serialize, Serializer};
 use std::{collections::BTreeMap, str::FromStr};
 #[cfg(all(any(test, feature = "test"), not(target_arch = "wasm32")))]
@@ -175,7 +175,8 @@ impl ServiceAbi for LoggingFungibleTokenAbi {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Parameter {
-    pub logger: String,
+    //pub serialized_logger_bytecode_id: String,
+    pub logger_application_id: String,
 }
 
 /// An operation.
