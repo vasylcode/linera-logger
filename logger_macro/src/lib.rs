@@ -52,7 +52,7 @@ pub fn initialize(input: TokenStream, anno: TokenStream) -> TokenStream {
                     let start4 = TokenStream::from_str(r#";
                         let __b = "#).unwrap();
                     let start5 = TokenStream::from_str(r#".height;
-                        __self.call_application(true, __i, &logger::LogStatement {
+                        __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::InitializationStart,
                             log: __l.clone(),
                             block_height: __b,
@@ -60,10 +60,10 @@ pub fn initialize(input: TokenStream, anno: TokenStream) -> TokenStream {
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                        }, vec![]).await?;
+                        }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
-                        __self.call_application(true, __i, &logger::LogStatement {
+                        __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::InitializationEnd,
                             log: __l.clone(),
                             block_height: __b,
@@ -71,7 +71,7 @@ pub fn initialize(input: TokenStream, anno: TokenStream) -> TokenStream {
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                        }, vec![]).await?;
+                        }}, vec![]).await?;
                         __r"#).unwrap();
                     let mut replacement = TokenStream::new();
                     replacement.extend(start0.into_iter());
@@ -147,7 +147,7 @@ pub fn execute_operation(input: TokenStream, anno: TokenStream) -> TokenStream {
                     let start4 = TokenStream::from_str(r#";
                         let __b = "#).unwrap();
                     let start5 = TokenStream::from_str(r#".height;
-                        __self.call_application(true, __i, &logger::LogStatement {
+                        __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::OperationExecutionStart,
                             log: __l.clone(),
                             block_height: __b,
@@ -155,10 +155,10 @@ pub fn execute_operation(input: TokenStream, anno: TokenStream) -> TokenStream {
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                        }, vec![]).await?;
+                        }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
-                        __self.call_application(true, __i, &logger::LogStatement {
+                        __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::OperationExecutionEnd,
                             log: __l.clone(),
                             block_height: __b,
@@ -166,7 +166,7 @@ pub fn execute_operation(input: TokenStream, anno: TokenStream) -> TokenStream {
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                        }, vec![]).await?;
+                        }}, vec![]).await?;
                         __r"#).unwrap();
                     let mut replacement = TokenStream::new();
                     replacement.extend(start0.into_iter());
@@ -247,7 +247,7 @@ pub fn execute_message(input: TokenStream, anno: TokenStream) -> TokenStream {
                     let start6 = TokenStream::from_str(r#".message_id.chain_id;
                         let __f = "#).unwrap();
                     let start7 = TokenStream::from_str(r#".message_id.height;
-                        __self.call_application(true, __i, &logger::LogStatement {
+                        __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::MessageExecutionStart,
                             log: __l.clone(),
                             block_height: __b,
@@ -255,10 +255,10 @@ pub fn execute_message(input: TokenStream, anno: TokenStream) -> TokenStream {
                             from_block_height: __f,
                             app: __a,
                             app_name: __n.clone(),
-                        }, vec![]).await?;
+                        }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
-                        __self.call_application(true, __i, &logger::LogStatement {
+                        __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::MessageExecutionEnd,
                             log: __l.clone(),
                             block_height: __b,
@@ -266,7 +266,7 @@ pub fn execute_message(input: TokenStream, anno: TokenStream) -> TokenStream {
                             from_block_height: __f,
                             app: __a,
                             app_name: __n.clone(),
-                        }, vec![]).await?;
+                        }}, vec![]).await?;
                         __r"#).unwrap();
                     let mut replacement = TokenStream::new();
                     replacement.extend(start0.into_iter());
@@ -344,7 +344,7 @@ pub fn handle_application_call(input: TokenStream, anno: TokenStream) -> TokenSt
                     let start3 = TokenStream::from_str(r#";
                         let __n = "#).unwrap();
                     let start4 = TokenStream::from_str(r#";
-                        __self.call_application(true, __i, &logger::LogStatement {
+                        __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::ApplicationCallHandleStart,
                             log: __l.clone(),
                             block_height: linera_sdk::base::BlockHeight(0),
@@ -352,10 +352,10 @@ pub fn handle_application_call(input: TokenStream, anno: TokenStream) -> TokenSt
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                        }, vec![]).await?;
+                        }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
-                        __self.call_application(true, __i, &logger::LogStatement {
+                        __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::ApplicationCallHandleEnd,
                             log: __l.clone(),
                             block_height: linera_sdk::base::BlockHeight(0),
@@ -363,7 +363,7 @@ pub fn handle_application_call(input: TokenStream, anno: TokenStream) -> TokenSt
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                        }, vec![]).await?;
+                        }}, vec![]).await?;
                         __r"#).unwrap();
                     let mut replacement = TokenStream::new();
                     replacement.extend(start0.into_iter());
@@ -435,7 +435,7 @@ pub fn handle_session_call(input: TokenStream, anno: TokenStream) -> TokenStream
                     let start3 = TokenStream::from_str(r#";
                         let __n = "#).unwrap();
                     let start4 = TokenStream::from_str(r#";
-                        __self.call_application(true, __i, &logger::LogStatement {
+                        __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::SessionCallHandleStart,
                             log: __l.clone(),
                             block_height: linera_sdk::base::BlockHeight(0),
@@ -443,10 +443,10 @@ pub fn handle_session_call(input: TokenStream, anno: TokenStream) -> TokenStream
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                        }, vec![]).await?;
+                        }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
-                        __self.call_application(true, __i, &logger::LogStatement {
+                        __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::SessionCallHandleEnd,
                             log: __l.clone(),
                             block_height: linera_sdk::base::BlockHeight(0),
@@ -454,7 +454,7 @@ pub fn handle_session_call(input: TokenStream, anno: TokenStream) -> TokenStream
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                        }, vec![]).await?;
+                        }}, vec![]).await?;
                         __r"#).unwrap();
                     let mut replacement = TokenStream::new();
                     replacement.extend(start0.into_iter());
@@ -528,7 +528,7 @@ pub fn function(input: TokenStream, anno: TokenStream) -> TokenStream {
         let start3 = TokenStream::from_str(r#";
             let __n = "#).unwrap();
         let start4 = TokenStream::from_str(r#";
-            self.call_application(true, __i, &logger::LogStatement {
+            self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                 log_type: logger::LogType::FunctionStart,
                 log: __l.clone(),
                 block_height: linera_sdk::base::BlockHeight(0),
@@ -536,10 +536,10 @@ pub fn function(input: TokenStream, anno: TokenStream) -> TokenStream {
                 from_block_height: linera_sdk::base::BlockHeight(0),
                 app: __a,
                 app_name: __n.clone(),
-            }, vec![]).await?;
+            }}, vec![]).await?;
             let __r ="#).unwrap();
         let end = TokenStream::from_str(r#";
-            self.call_application(true, __i, &logger::LogStatement {
+            self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                 log_type: logger::LogType::FunctionEnd,
                 log: __l.clone(),
                 block_height: linera_sdk::base::BlockHeight(0),
@@ -547,7 +547,7 @@ pub fn function(input: TokenStream, anno: TokenStream) -> TokenStream {
                 from_block_height: linera_sdk::base::BlockHeight(0),
                 app: __a,
                 app_name: __n.clone(),
-            }, vec![]).await?;
+            }}, vec![]).await?;
             __r"#).unwrap();
         let mut replacement = TokenStream::new();
         replacement.extend(start0.into_iter());

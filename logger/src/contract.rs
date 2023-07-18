@@ -10,7 +10,7 @@ use linera_sdk::{
     ExecutionResult, OperationContext, SessionCallResult, ViewStateStorage,
 };
 use thiserror::Error;
-use logger::LogStatement;
+use logger::{LogStatement, ApplicationCall};
 use linera_sdk::views::views::View;
 
 linera_sdk::contract!(Logger);
@@ -52,11 +52,42 @@ impl Contract for Logger {
     async fn handle_application_call(
         &mut self,
         _context: &CalleeContext,
-        log_statement: LogStatement,
+        argument: ApplicationCall,
         _forwarded_sessions: Vec<SessionId>,
     ) -> Result<ApplicationCallResult<Self::Message, Self::Response, Self::SessionState>, Self::Error> {
-        self.log.push(log_statement);
-        Ok(ApplicationCallResult::default())
+        match argument {
+            ApplicationCall::Log { log_statement } => {
+                self.log.push(log_statement);
+                Ok(ApplicationCallResult::default())
+            },
+            ApplicationCall::Query {
+                log_type,
+                keyword,
+                app,
+                app_name,
+            } => {
+                let mut out = vec![];
+                let log = self.log.read(0..self.log.count()).await?;
+                for log_statement in log {
+                    if let Some(log_type) = log_type {
+                        if log_statement.log_type != log_type { continue; }
+                    }
+                    if !log_statement.log.contains(&keyword) { continue; }
+                    if let Some(app) = app {
+                        if log_statement.app != app { continue; }
+                    }
+                    if let Some(app_name) = app_name.clone() {
+                        if log_statement.app_name != app_name { continue; }
+                    }
+                    out.push(log_statement);
+                }
+                Ok(ApplicationCallResult {
+                    value: out,
+                    execution_result: ExecutionResult::default(),
+                    create_sessions: vec![],
+                })
+            }
+        }
     }
 
     async fn handle_session_call(
@@ -80,6 +111,9 @@ pub enum Error {
     /// Failed to deserialize JSON string
     #[error("Failed to deserialize JSON string")]
     JsonError(#[from] serde_json::Error),
+
+    #[error("view error {0}")]
+    ViewError(#[from] linera_sdk::views::views::ViewError),
 
     // Add more error variants here.
 }

@@ -1,6 +1,6 @@
 use linera_sdk::base::{ContractAbi, ServiceAbi, ApplicationId, BlockHeight, ChainId};
 use serde::{Serialize, Deserialize};
-use async_graphql::{Object, Request, Response, Enum};
+use async_graphql::{SimpleObject, InputObject, Request, Response, Enum};
 
 #[derive(Clone, Copy, Eq, PartialEq, Ord, PartialOrd, Hash, Debug, Serialize, Deserialize)]
 pub struct LoggerAbi;
@@ -9,10 +9,10 @@ impl ContractAbi for LoggerAbi {
     type InitializationArgument = ();
     type Parameters = ();
     type Operation = ();
-    type ApplicationCall = LogStatement;
+    type ApplicationCall = ApplicationCall;
     type Message = ();
     type SessionCall = ();
-    type Response = ();
+    type Response = Vec<LogStatement>;
     type SessionState = ();
 }
 
@@ -45,7 +45,7 @@ pub enum LogType {
     FunctionEnd,
 }
 
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, SimpleObject, InputObject)]
 pub struct LogStatement {
     pub log_type: LogType,
     pub log: String,
@@ -58,13 +58,15 @@ pub struct LogStatement {
     pub app_name: String,
 }
 
-#[Object]
-impl LogStatement {
-    async fn log_type(&self) -> LogType { self.log_type }
-    async fn log(&self) -> String { self.log.clone() }
-    async fn block_height(&self) -> BlockHeight { self.block_height }
-    async fn other_chain(&self) -> ChainId { self.other_chain }
-    async fn from_block_height(&self) -> BlockHeight { self.from_block_height }
-    async fn app(&self) -> ApplicationId { self.app }
-    async fn app_name(&self) -> String { self.app_name.clone() }
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub enum ApplicationCall {
+    Log {
+        log_statement: LogStatement,
+    },
+    Query {
+        log_type: Option<LogType>,
+        keyword: String,
+        app: Option<ApplicationId>,
+        app_name: Option<String>,
+    },
 }
