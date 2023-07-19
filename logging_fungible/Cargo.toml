@@ -20,6 +20,7 @@ linera-base = { path = "../../linera-protocol/linera-base" }
 find-crate = "0.6.3"
 hex = "0.4.3"
 toml = { version = "0.7.6", features = ["parse"] }
+chrono = { version = "0.4.26", features = ["clock"] }
 
 [dev-dependencies]
 linera-sdk = { path = "../../linera-protocol/linera-sdk", features = ["test", "wasmer"] }

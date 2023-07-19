@@ -1,6 +1,7 @@
 use linera_sdk::base::{ContractAbi, ServiceAbi, ApplicationId, BlockHeight, ChainId};
 use serde::{Serialize, Deserialize};
 use async_graphql::{SimpleObject, InputObject, Request, Response, Enum};
+use std::ops::Range;
 
 #[derive(Clone, Copy, Eq, PartialEq, Ord, PartialOrd, Hash, Debug, Serialize, Deserialize)]
 pub struct LoggerAbi;
@@ -56,6 +57,7 @@ pub struct LogStatement {
     pub from_block_height: BlockHeight, //only when handling message
     pub app: ApplicationId,
     pub app_name: String,
+    pub timestamp: i64,
 }
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -68,5 +70,6 @@ pub enum ApplicationCall {
         keyword: String,
         app: Option<ApplicationId>,
         app_name: Option<String>,
+        timestamp: Option<Range<i64>>,
     },
 }

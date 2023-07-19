@@ -20,6 +20,7 @@ use std::str::{FromStr, from_utf8, Utf8Error};
 use thiserror::Error;
 use log::{info};
 use logger_macro::*;
+use chrono::prelude::Utc;
 
 linera_sdk::contract!(LoggingFungibleToken);
 

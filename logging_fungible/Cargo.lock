@@ -1894,6 +1894,7 @@ dependencies = [
  "async-graphql",
  "async-trait",
  "bcs",
+ "chrono",
  "find-crate",
  "futures",
  "hex",

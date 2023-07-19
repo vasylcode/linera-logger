@@ -65,6 +65,7 @@ impl Contract for Logger {
                 keyword,
                 app,
                 app_name,
+                timestamp,
             } => {
                 let mut out = vec![];
                 let log = self.log.read(0..self.log.count()).await?;
@@ -78,6 +79,9 @@ impl Contract for Logger {
                     }
                     if let Some(app_name) = app_name.clone() {
                         if log_statement.app_name != app_name { continue; }
+                    }
+                    if let Some(range) = timestamp.clone() {
+                        if !range.contains(&log_statement.timestamp) { continue; }
                     }
                     out.push(log_statement);
                 }
