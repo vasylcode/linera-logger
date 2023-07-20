@@ -69,6 +69,20 @@ impl Contract for Logger {
             } => {
                 let mut out = vec![];
                 let log = self.log.read(0..self.log.count()).await?;
+                //let mut times = None;
+                /*if let Some(range) = timestamp {
+                    let st = OffsetDateTime::parse(&range.0, &well_known::Rfc3339);
+                    let en = OffsetDateTime::parse(&range.1, &well_known::Rfc3339);
+                    if let Ok(o) = st {
+                        if let Ok(e) = en {
+                            times = Some((o, e));
+                        } else {
+                            times = None;
+                        }
+                    } else {
+                        times = None;
+                    }
+                }*/
                 for log_statement in log {
                     if let Some(log_type) = log_type {
                         if log_statement.log_type != log_type { continue; }
@@ -80,8 +94,14 @@ impl Contract for Logger {
                     if let Some(app_name) = app_name.clone() {
                         if log_statement.app_name != app_name { continue; }
                     }
-                    if let Some(range) = timestamp.clone() {
-                        if !range.contains(&log_statement.timestamp) { continue; }
+                    /*if let Some(time) = times {
+                        let tim = OffsetDateTime::parse(&log_statement.timestamp, &well_known::Rfc3339);
+                        if let Ok(ts) = tim {
+                            if ts < time.0 || ts >= time.1 { continue; }
+                        }
+                    }*/
+                    if let Some(range) = timestamp {
+                        if log_statement.timestamp < range.0 || log_statement.timestamp >= range.1 { continue; }
                     }
                     out.push(log_statement);
                 }

@@ -1,0 +1,17 @@
+/mnt/d/PROJECTS/blockchain/linera_logger/logger/target/wasm32-unknown-unknown/release/deps/linera_views-a4d04bcd893231ab.rmeta: /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/lib.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/batch.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/common.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/views.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/register_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/log_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/queue_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/map_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/set_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/collection_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/memory.rs
+
+/mnt/d/PROJECTS/blockchain/linera_logger/logger/target/wasm32-unknown-unknown/release/deps/liblinera_views-a4d04bcd893231ab.rlib: /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/lib.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/batch.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/common.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/views.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/register_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/log_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/queue_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/map_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/set_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/collection_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/memory.rs
+
+/mnt/d/PROJECTS/blockchain/linera_logger/logger/target/wasm32-unknown-unknown/release/deps/linera_views-a4d04bcd893231ab.d: /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/lib.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/batch.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/common.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/views.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/register_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/log_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/queue_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/map_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/set_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/collection_view.rs /mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/memory.rs
+
+/mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/lib.rs:
+/mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/batch.rs:
+/mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/common.rs:
+/mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/views.rs:
+/mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/register_view.rs:
+/mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/log_view.rs:
+/mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/queue_view.rs:
+/mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/map_view.rs:
+/mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/set_view.rs:
+/mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/collection_view.rs:
+/mnt/d/PROJECTS/blockchain/linera-protocol/linera-views/src/memory.rs:

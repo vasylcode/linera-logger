@@ -42,7 +42,7 @@ pub fn initialize(input: TokenStream, anno: TokenStream) -> TokenStream {
                     let mut __s = "".to_string();
                     let mut __sp = std::env::var_os("CARGO_MANIFEST_DIR").unwrap().into_string().unwrap();
                     let mut __p = std::path::PathBuf::from(&__sp);
-                    __p.push("Cargo.toml");
+                    __p.push("cargo.toml");
                     use std::io::Read;
                     std::fs::File::open(__p.as_path()).unwrap().read_to_string(&mut __s).unwrap();
                     let __n = toml::Table::from_str(&__s).unwrap();
@@ -60,7 +60,7 @@ pub fn initialize(input: TokenStream, anno: TokenStream) -> TokenStream {
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                            timestamp: Utc::now().timestamp_millis(),
+                            timestamp: linera_sdk::contract::system_api::current_system_time(),
                         }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
@@ -72,7 +72,7 @@ pub fn initialize(input: TokenStream, anno: TokenStream) -> TokenStream {
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                            timestamp: Utc::now().timestamp_millis(),
+                            timestamp: linera_sdk::contract::system_api::current_system_time(),
                         }}, vec![]).await?;
                         __r"#).unwrap();
                     let mut replacement = TokenStream::new();
@@ -157,7 +157,7 @@ pub fn execute_operation(input: TokenStream, anno: TokenStream) -> TokenStream {
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                            timestamp: Utc::now().timestamp_millis(),
+                            timestamp: linera_sdk::contract::system_api::current_system_time(),
                         }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
@@ -169,7 +169,7 @@ pub fn execute_operation(input: TokenStream, anno: TokenStream) -> TokenStream {
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                            timestamp: Utc::now().timestamp_millis(),
+                            timestamp: linera_sdk::contract::system_api::current_system_time(),
                         }}, vec![]).await?;
                         __r"#).unwrap();
                     let mut replacement = TokenStream::new();
@@ -259,7 +259,7 @@ pub fn execute_message(input: TokenStream, anno: TokenStream) -> TokenStream {
                             from_block_height: __f,
                             app: __a,
                             app_name: __n.clone(),
-                            timestamp: Utc::now().timestamp_millis(),
+                            timestamp: linera_sdk::contract::system_api::current_system_time(),
                         }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
@@ -271,7 +271,7 @@ pub fn execute_message(input: TokenStream, anno: TokenStream) -> TokenStream {
                             from_block_height: __f,
                             app: __a,
                             app_name: __n.clone(),
-                            timestamp: Utc::now().timestamp_millis(),
+                            timestamp: linera_sdk::contract::system_api::current_system_time(),
                         }}, vec![]).await?;
                         __r"#).unwrap();
                     let mut replacement = TokenStream::new();
@@ -358,7 +358,7 @@ pub fn handle_application_call(input: TokenStream, anno: TokenStream) -> TokenSt
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                            timestamp: Utc::now().timestamp_millis(),
+                            timestamp: linera_sdk::contract::system_api::current_system_time(),
                         }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
@@ -370,7 +370,7 @@ pub fn handle_application_call(input: TokenStream, anno: TokenStream) -> TokenSt
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                            timestamp: Utc::now().timestamp_millis(),
+                            timestamp: linera_sdk::contract::system_api::current_system_time(),
                         }}, vec![]).await?;
                         __r"#).unwrap();
                     let mut replacement = TokenStream::new();
@@ -451,7 +451,7 @@ pub fn handle_session_call(input: TokenStream, anno: TokenStream) -> TokenStream
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                            timestamp: Utc::now().timestamp_millis(),
+                            timestamp: linera_sdk::contract::system_api::current_system_time(),
                         }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
@@ -463,7 +463,7 @@ pub fn handle_session_call(input: TokenStream, anno: TokenStream) -> TokenStream
                             from_block_height: linera_sdk::base::BlockHeight(0),
                             app: __a,
                             app_name: __n.clone(),
-                            timestamp: Utc::now().timestamp_millis(),
+                            timestamp: linera_sdk::contract::system_api::current_system_time(),
                         }}, vec![]).await?;
                         __r"#).unwrap();
                     let mut replacement = TokenStream::new();
@@ -546,7 +546,7 @@ pub fn function(input: TokenStream, anno: TokenStream) -> TokenStream {
                 from_block_height: linera_sdk::base::BlockHeight(0),
                 app: __a,
                 app_name: __n.clone(),
-                timestamp: Utc::now().timestamp_millis(),
+                            timestamp: linera_sdk::contract::system_api::current_system_time(),
             }}, vec![]).await?;
             let __r ="#).unwrap();
         let end = TokenStream::from_str(r#";
@@ -558,7 +558,7 @@ pub fn function(input: TokenStream, anno: TokenStream) -> TokenStream {
                 from_block_height: linera_sdk::base::BlockHeight(0),
                 app: __a,
                 app_name: __n.clone(),
-                timestamp: Utc::now().timestamp_millis(),
+                            timestamp: linera_sdk::contract::system_api::current_system_time(),
             }}, vec![]).await?;
             __r"#).unwrap();
         let mut replacement = TokenStream::new();
