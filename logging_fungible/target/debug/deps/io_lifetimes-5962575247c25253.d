@@ -1,0 +1,12 @@
+/mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/target/debug/deps/io_lifetimes-5962575247c25253.rmeta: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/portability.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/traits.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/types.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/impls_std.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/impls_std_views.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/raw.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/views.rs
+
+/mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/target/debug/deps/io_lifetimes-5962575247c25253.d: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/portability.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/traits.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/types.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/impls_std.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/impls_std_views.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/raw.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/views.rs
+
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/lib.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/portability.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/traits.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/types.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/impls_std.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/impls_std_views.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/raw.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-0.7.5/src/views.rs:

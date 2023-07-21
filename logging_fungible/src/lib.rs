@@ -198,6 +198,8 @@ pub enum Operation {
     },
 }
 
+
+
 /// A message.
 #[derive(Debug, Deserialize, Serialize)]
 pub enum Message {
@@ -246,12 +248,23 @@ pub enum SessionCall {
 scalar!(AccountOwner);
 
 /// An account owner.
-#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Eq, Ord, PartialEq, PartialOrd)]
 pub enum AccountOwner {
     /// An account owned by a user.
     User(Owner),
     /// An account for an application.
     Application(ApplicationId),
+}
+
+impl ::core::fmt::Debug for AccountOwner {
+    fn fmt(&self, f: &mut ::core::fmt::Formatter) -> ::core::fmt::Result {
+        match self {
+            AccountOwner::User(__self_0) =>
+                f.debug_tuple("User").field(&format_args!("{}", __self_0)).finish(),
+            AccountOwner::Application(__self_0) =>
+                f.debug_tuple("Application").field(&__self_0).finish(),
+        }
+    }
 }
 
 impl Serialize for AccountOwner {
@@ -338,11 +351,20 @@ pub struct InitialState {
 
 /// An account.
 #[derive(
-    Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize, InputObject,
+    Clone, Copy, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize, InputObject,
 )]
 pub struct Account {
     pub chain_id: ChainId,
     pub owner: AccountOwner,
+}
+
+impl ::core::fmt::Debug for Account {
+    fn fmt(&self, f: &mut ::core::fmt::Formatter) -> ::core::fmt::Result {
+        f.debug_struct("Account")
+            .field("chain_id", &format_args!("{}", self.chain_id))
+            .field("owner", &self.owner)
+            .finish()
+    }
 }
 
 #[derive(Debug, Deserialize, Serialize, Copy, Clone)]

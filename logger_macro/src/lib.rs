@@ -61,9 +61,21 @@ pub fn initialize(input: TokenStream, anno: TokenStream) -> TokenStream {
                             app: __a,
                             app_name: __n.clone(),
                             timestamp: linera_sdk::contract::system_api::current_system_time(),
+                            function_name: "".to_string(),
+                            messages_sent: vec![],
                         }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
+                        let mut __m = vec![];
+                        let temp = match __r {
+                            Ok(bruh) => {
+                                for (d, b, m) in &bruh.messages {
+                                    __m.push(format!("{:?} {:?} {:?}", serde_json::to_string(d), b, m));
+                                }
+                                Ok(bruh)
+                            },
+                            Err(err) => Err(err)
+                        };
                         __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::InitializationEnd,
                             log: __l.clone(),
@@ -73,8 +85,10 @@ pub fn initialize(input: TokenStream, anno: TokenStream) -> TokenStream {
                             app: __a,
                             app_name: __n.clone(),
                             timestamp: linera_sdk::contract::system_api::current_system_time(),
+                            function_name: "".to_string(),
+                            messages_sent: __m,
                         }}, vec![]).await?;
-                        __r"#).unwrap();
+                        temp"#).unwrap();
                     let mut replacement = TokenStream::new();
                     replacement.extend(start0.into_iter());
                     replacement.extend(start1.into_iter());
@@ -158,9 +172,21 @@ pub fn execute_operation(input: TokenStream, anno: TokenStream) -> TokenStream {
                             app: __a,
                             app_name: __n.clone(),
                             timestamp: linera_sdk::contract::system_api::current_system_time(),
+                            function_name: "".to_string(),
+                            messages_sent: vec![],
                         }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
+                        let mut __m = vec![];
+                        let temp = match __r {
+                            Ok(bruh) => {
+                                for (d, b, m) in &bruh.messages {
+                                    __m.push(format!("{:?} {:?} {:?}", serde_json::to_string(d), b, m));
+                                }
+                                Ok(bruh)
+                            },
+                            Err(err) => Err(err)
+                        };
                         __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::OperationExecutionEnd,
                             log: __l.clone(),
@@ -170,8 +196,10 @@ pub fn execute_operation(input: TokenStream, anno: TokenStream) -> TokenStream {
                             app: __a,
                             app_name: __n.clone(),
                             timestamp: linera_sdk::contract::system_api::current_system_time(),
+                            function_name: "".to_string(),
+                            messages_sent: __m,
                         }}, vec![]).await?;
-                        __r"#).unwrap();
+                        temp"#).unwrap();
                     let mut replacement = TokenStream::new();
                     replacement.extend(start0.into_iter());
                     replacement.extend(start1.into_iter());
@@ -260,9 +288,21 @@ pub fn execute_message(input: TokenStream, anno: TokenStream) -> TokenStream {
                             app: __a,
                             app_name: __n.clone(),
                             timestamp: linera_sdk::contract::system_api::current_system_time(),
+                            function_name: "".to_string(),
+                            messages_sent: vec![],
                         }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
+                        let mut __m = vec![];
+                        let temp = match __r {
+                            Ok(bruh) => {
+                                for (d, b, m) in &bruh.messages {
+                                    __m.push(format!("{:?} {:?} {:?}", serde_json::to_string(d), b, m));
+                                }
+                                Ok(bruh)
+                            },
+                            Err(err) => Err(err)
+                        };
                         __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::MessageExecutionEnd,
                             log: __l.clone(),
@@ -272,8 +312,10 @@ pub fn execute_message(input: TokenStream, anno: TokenStream) -> TokenStream {
                             app: __a,
                             app_name: __n.clone(),
                             timestamp: linera_sdk::contract::system_api::current_system_time(),
+                            function_name: "".to_string(),
+                            messages_sent: __m,
                         }}, vec![]).await?;
-                        __r"#).unwrap();
+                        temp"#).unwrap();
                     let mut replacement = TokenStream::new();
                     replacement.extend(start0.into_iter());
                     replacement.extend(start1.into_iter());
@@ -359,9 +401,21 @@ pub fn handle_application_call(input: TokenStream, anno: TokenStream) -> TokenSt
                             app: __a,
                             app_name: __n.clone(),
                             timestamp: linera_sdk::contract::system_api::current_system_time(),
+                            function_name: "".to_string(),
+                            messages_sent: vec![],
                         }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
+                        let mut __m = vec![];
+                        let temp = match __r {
+                            Ok(bruh) => {
+                                for (d, b, m) in &bruh.execution_result.messages {
+                                    __m.push(format!("{:?} {:?} {:?}", serde_json::to_string(d), b, m));
+                                }
+                                Ok(bruh)
+                            },
+                            Err(err) => Err(err)
+                        };
                         __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::ApplicationCallHandleEnd,
                             log: __l.clone(),
@@ -371,8 +425,10 @@ pub fn handle_application_call(input: TokenStream, anno: TokenStream) -> TokenSt
                             app: __a,
                             app_name: __n.clone(),
                             timestamp: linera_sdk::contract::system_api::current_system_time(),
+                            function_name: "".to_string(),
+                            messages_sent: __m,
                         }}, vec![]).await?;
-                        __r"#).unwrap();
+                        temp"#).unwrap();
                     let mut replacement = TokenStream::new();
                     replacement.extend(start0.into_iter());
                     replacement.extend(start1.into_iter());
@@ -452,9 +508,21 @@ pub fn handle_session_call(input: TokenStream, anno: TokenStream) -> TokenStream
                             app: __a,
                             app_name: __n.clone(),
                             timestamp: linera_sdk::contract::system_api::current_system_time(),
+                            function_name: "".to_string(),
+                            messages_sent: vec![],
                         }}, vec![]).await?;
                         let __r ="#).unwrap();
                     let end = TokenStream::from_str(r#";
+                        let mut __m = vec![];
+                        let temp = match __r {
+                            Ok(bruh) => {
+                                for (d, b, m) in &bruh.inner.execution_result.messages {
+                                    __m.push(format!("{:?} {:?} {:?}", serde_json::to_string(d), b, m));
+                                }
+                                Ok(bruh)
+                            },
+                            Err(err) => Err(err)
+                        };
                         __self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                             log_type: logger::LogType::SessionCallHandleEnd,
                             log: __l.clone(),
@@ -464,8 +532,10 @@ pub fn handle_session_call(input: TokenStream, anno: TokenStream) -> TokenStream
                             app: __a,
                             app_name: __n.clone(),
                             timestamp: linera_sdk::contract::system_api::current_system_time(),
+                            function_name: "".to_string(),
+                            messages_sent: __m,
                         }}, vec![]).await?;
-                        __r"#).unwrap();
+                        temp"#).unwrap();
                     let mut replacement = TokenStream::new();
                     replacement.extend(start0.into_iter());
                     replacement.extend(start1.into_iter());
@@ -538,6 +608,8 @@ pub fn function(input: TokenStream, anno: TokenStream) -> TokenStream {
         let start3 = TokenStream::from_str(r#";
             let __n = "#).unwrap();
         let start4 = TokenStream::from_str(r#";
+            let __f = "#).unwrap();
+        let start5 = TokenStream::from_str(r#".to_string();
             self.call_application(true, __i, &logger::ApplicationCall::Log { log_statement: logger::LogStatement {
                 log_type: logger::LogType::FunctionStart,
                 log: __l.clone(),
@@ -546,7 +618,9 @@ pub fn function(input: TokenStream, anno: TokenStream) -> TokenStream {
                 from_block_height: linera_sdk::base::BlockHeight(0),
                 app: __a,
                 app_name: __n.clone(),
-                            timestamp: linera_sdk::contract::system_api::current_system_time(),
+                timestamp: linera_sdk::contract::system_api::current_system_time(),
+                function_name: __f.clone(),
+                messages_sent: vec![],
             }}, vec![]).await?;
             let __r ="#).unwrap();
         let end = TokenStream::from_str(r#";
@@ -558,17 +632,21 @@ pub fn function(input: TokenStream, anno: TokenStream) -> TokenStream {
                 from_block_height: linera_sdk::base::BlockHeight(0),
                 app: __a,
                 app_name: __n.clone(),
-                            timestamp: linera_sdk::contract::system_api::current_system_time(),
+                timestamp: linera_sdk::contract::system_api::current_system_time(),
+                function_name: __f.clone(),
+                messages_sent: vec![],
             }}, vec![]).await?;
             __r"#).unwrap();
         let mut replacement = TokenStream::new();
         replacement.extend(start0.into_iter());
         replacement.extend(yes.into_iter());
         replacement.extend(start2.into_iter());
-        replacement.extend(input.clone().into_iter());
+        replacement.extend(input.into_iter());
         replacement.extend(start3.into_iter());
         replacement.extend(name.into_iter());
         replacement.extend(start4.into_iter());
+        replacement.extend([TokenTree::Literal(Literal::string(&format!("{}", anno.clone().into_iter().nth(2).unwrap())))].into_iter());
+        replacement.extend(start5.into_iter());
         replacement.extend(vec![code].into_iter());
         replacement.extend(end.into_iter());
         va[lena - 1] = TokenTree::Group(Group::new(Delimiter::Brace, replacement));

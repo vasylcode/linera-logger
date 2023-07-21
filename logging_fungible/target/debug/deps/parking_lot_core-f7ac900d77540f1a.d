@@ -1,0 +1,11 @@
+/mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/target/debug/deps/parking_lot_core-f7ac900d77540f1a.rmeta: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/parking_lot.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/spinwait.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/thread_parker/mod.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/util.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/word_lock.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/thread_parker/linux.rs
+
+/mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/target/debug/deps/parking_lot_core-f7ac900d77540f1a.d: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/parking_lot.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/spinwait.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/thread_parker/mod.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/util.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/word_lock.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/thread_parker/linux.rs
+
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/lib.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/parking_lot.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/spinwait.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/thread_parker/mod.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/util.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/word_lock.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.9.8/src/thread_parker/linux.rs:

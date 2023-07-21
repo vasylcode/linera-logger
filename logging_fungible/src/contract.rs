@@ -63,11 +63,11 @@ impl Contract for LoggingFungibleToken {
                 amount,
                 target_account,
             } => {
-                Self::check_account_authentication(None, context.authenticated_signer, owner)?;
+                self.check_account_authentication(None, context.authenticated_signer, owner).await?;
                 self.debit(owner, amount).await?;
                 Ok(self
                     .finish_transfer_to_account(amount, target_account)
-                    .await)
+                    .await?)
             }
 
             Operation::Claim {
@@ -75,11 +75,11 @@ impl Contract for LoggingFungibleToken {
                 amount,
                 target_account,
             } => {
-                Self::check_account_authentication(
+                self.check_account_authentication(
                     None,
                     context.authenticated_signer,
                     source_account.owner,
-                )?;
+                ).await?;
                 self.claim(source_account, amount, target_account).await
             }
         };
@@ -103,11 +103,11 @@ impl Contract for LoggingFungibleToken {
                 amount,
                 target_account,
             } => {
-                Self::check_account_authentication(None, context.authenticated_signer, owner)?;
+                self.check_account_authentication(None, context.authenticated_signer, owner).await?;
                 self.debit(owner, amount).await?;
                 Ok(self
                     .finish_transfer_to_account(amount, target_account)
-                    .await)
+                    .await?)
             }
         };
         res
@@ -134,15 +134,15 @@ impl Contract for LoggingFungibleToken {
                 amount,
                 destination,
             } => {
-                Self::check_account_authentication(
+                self.check_account_authentication(
                     context.authenticated_caller_id,
                     context.authenticated_signer,
                     owner,
-                )?;
+                ).await?;
                 self.debit(owner, amount).await?;
                 Ok(self
                     .finish_transfer_to_destination(amount, destination)
-                    .await)
+                    .await?)
             }
 
             ApplicationCall::Claim {
@@ -150,11 +150,11 @@ impl Contract for LoggingFungibleToken {
                 amount,
                 target_account,
             } => {
-                Self::check_account_authentication(
+                self.check_account_authentication(
                     None,
                     context.authenticated_signer,
                     source_account.owner,
-                )?;
+                ).await?;
                 let execution_result = self.claim(source_account, amount, target_account).await?;
                 Ok(ApplicationCallResult {
                     execution_result,
@@ -174,7 +174,7 @@ impl Contract for LoggingFungibleToken {
         _forwarded_sessions: Vec<SessionId>,
     ) -> Result<SessionCallResult<Self::Message, Amount, Self::SessionState>, Self::Error> {
         match request {
-            SessionCall::Balance => self.handle_session_balance(state),
+            SessionCall::Balance => self.handle_session_balance(state).await,
             SessionCall::Transfer {
                 amount,
                 destination,
@@ -198,8 +198,10 @@ impl LoggingFungibleToken {
         return Err(Error::NoRequiredIdsError);*/
         Ok(bcs::from_bytes::<ApplicationId>(&hex::decode(Self::parameters()?.logger_application_id)?)?.with_abi::<logger::LoggerAbi>())
     }
-    /// Verifies that a transfer is authenticated for this local account.
-    fn check_account_authentication(
+
+    #[function(Self::logger_id()?)]
+    async fn check_account_authentication(
+        &mut self,
         authenticated_application_id: Option<ApplicationId>,
         authenticated_signer: Option<Owner>,
         owner: AccountOwner,
@@ -211,9 +213,9 @@ impl LoggingFungibleToken {
         }
     }
 
-    /// Handles a session balance request sent by an application.
-    fn handle_session_balance(
-        &self,
+    #[function(Self::logger_id()?)]
+    async fn handle_session_balance(
+        &mut self,
         balance: Amount,
     ) -> Result<SessionCallResult<Message, Amount, Amount>, Error> {
         let application_call_result = ApplicationCallResult {
@@ -228,7 +230,6 @@ impl LoggingFungibleToken {
         Ok(session_call_result)
     }
 
-    /// Handles a transfer from a session.
     #[function(Self::logger_id()?)]
     async fn handle_session_transfer(
         &mut self,
@@ -245,7 +246,7 @@ impl LoggingFungibleToken {
         Ok(SessionCallResult {
             inner: self
                 .finish_transfer_to_destination(amount, destination)
-                .await,
+                .await?,
             new_state: updated_session,
         })
     }
@@ -261,7 +262,7 @@ impl LoggingFungibleToken {
             self.debit(source_account.owner, amount).await?;
             Ok(self
                 .finish_transfer_to_account(amount, target_account)
-                .await)
+                .await?)
         } else {
             let message = Message::Withdraw {
                 owner: source_account.owner,
@@ -273,39 +274,39 @@ impl LoggingFungibleToken {
         }
     }
 
-    /// Executes the final step of a transfer where the tokens are sent to the destination.
+    #[function(Self::logger_id()?)]
     async fn finish_transfer_to_destination(
         &mut self,
         amount: Amount,
         destination: Destination,
-    ) -> ApplicationCallResult<Message, Amount, Amount> {
+    ) -> Result<ApplicationCallResult<Message, Amount, Amount>, Error> {
         let mut result = ApplicationCallResult::default();
         match destination {
             Destination::Account(account) => {
-                result.execution_result = self.finish_transfer_to_account(amount, account).await;
+                result.execution_result = self.finish_transfer_to_account(amount, account).await?;
             }
             Destination::NewSession => {
                 result.create_sessions.push(amount);
             }
         }
-        result
+        Ok(result)
     }
 
-    /// Executes the final step of a transfer where the tokens are sent to the destination.
+    #[function(Self::logger_id()?)]
     async fn finish_transfer_to_account(
         &mut self,
         amount: Amount,
         account: Account,
-    ) -> ExecutionResult<Message> {
+    ) -> Result<ExecutionResult<Message>, Error> {
         if account.chain_id == system_api::current_chain_id() {
             self.credit(account.owner, amount).await;
-            ExecutionResult::default()
+            Ok(ExecutionResult::default())
         } else {
             let message = Message::Credit {
                 owner: account.owner,
                 amount,
             };
-            ExecutionResult::default().with_message(account.chain_id, message)
+            Ok(ExecutionResult::default().with_message(account.chain_id, message))
         }
     }
 }

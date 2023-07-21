@@ -1,0 +1,12 @@
+/mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/target/debug/deps/ed25519_dalek-2b39bb16c31456e2.rmeta: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/batch.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/constants.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/keypair.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/errors.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/public.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/secret.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/signature.rs
+
+/mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/target/debug/deps/ed25519_dalek-2b39bb16c31456e2.d: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/batch.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/constants.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/keypair.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/errors.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/public.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/secret.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/signature.rs
+
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/lib.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/batch.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/constants.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/keypair.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/errors.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/public.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/secret.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ed25519-dalek-1.0.1/src/signature.rs:

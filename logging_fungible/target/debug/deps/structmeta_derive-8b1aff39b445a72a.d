@@ -1,0 +1,10 @@
+/mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/target/debug/deps/libstructmeta_derive-8b1aff39b445a72a.so: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/syn_utils.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/parse.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/struct_meta.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/to_tokens.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/to_tokens_attribute.rs
+
+/mnt/d/PROJECTS/blockchain/linera_logger/logging_fungible/target/debug/deps/structmeta_derive-8b1aff39b445a72a.d: /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/lib.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/syn_utils.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/parse.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/struct_meta.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/to_tokens.rs /root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/to_tokens_attribute.rs
+
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/lib.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/syn_utils.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/parse.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/struct_meta.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/to_tokens.rs:
+/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structmeta-derive-0.1.6/src/to_tokens_attribute.rs:

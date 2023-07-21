@@ -1898,7 +1898,6 @@ dependencies = [
  "find-crate",
  "futures",
  "hex",
- "linera-base",
  "linera-sdk",
  "linera-views",
  "log",

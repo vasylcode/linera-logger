@@ -8,8 +8,8 @@ async-graphql = { version = "5.0.7", default-features = false }
 async-trait = "0.1.52"
 bcs = "0.1.3"
 futures = "0.3.17"
-linera-sdk = "0.2.0"
-linera-views = "0.2.0"
+linera-sdk = { path = "../../linera-protocol/linera-sdk" }
+linera-views = { path = "../../linera-protocol/linera-views" }
 serde = { version = "1.0.130", features = ["derive"] }
 serde_json = { version = "1.0.93", features = ["std"] }
 thiserror = "1.0.31"
@@ -21,7 +21,7 @@ hex = "0.4.3"
 toml = { version = "0.7.6", features = ["parse"] }
 
 [dev-dependencies]
-linera-sdk = { version = "0.2.0", features = ["test", "wasmer"] }
+linera-sdk = { path = "../../linera-protocol/linera-sdk", features = ["test", "wasmer"] }
 webassembly-test = "0.1.0"
 
 [[bin]]

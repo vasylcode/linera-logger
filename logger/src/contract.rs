@@ -66,6 +66,7 @@ impl Contract for Logger {
                 app,
                 app_name,
                 timestamp,
+                function_name,
             } => {
                 let mut out = vec![];
                 let log = self.log.read(0..self.log.count()).await?;
@@ -102,6 +103,9 @@ impl Contract for Logger {
                     }*/
                     if let Some(range) = timestamp {
                         if log_statement.timestamp < range.0 || log_statement.timestamp >= range.1 { continue; }
+                    }
+                    if let Some(function_name) = function_name.clone() {
+                        if log_statement.function_name != function_name { continue; }
                     }
                     out.push(log_statement);
                 }
