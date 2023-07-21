@@ -42,7 +42,7 @@ pub fn initialize(input: TokenStream, anno: TokenStream) -> TokenStream {
                     let mut __s = "".to_string();
                     let mut __sp = std::env::var_os("CARGO_MANIFEST_DIR").unwrap().into_string().unwrap();
                     let mut __p = std::path::PathBuf::from(&__sp);
-                    __p.push("cargo.toml");
+                    __p.push("Cargo.toml");
                     use std::io::Read;
                     std::fs::File::open(__p.as_path()).unwrap().read_to_string(&mut __s).unwrap();
                     let __n = toml::Table::from_str(&__s).unwrap();
