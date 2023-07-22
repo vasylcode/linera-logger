@@ -204,7 +204,7 @@ pub enum Operation {
 #[derive(Debug, Deserialize, Serialize)]
 pub enum Message {
     /// Credit the given account.
-    Credit { owner: AccountOwner, amount: Amount },
+    Credit { owner: AccountOwner, amount: Amount, from: AccountOwner },
 
     /// Withdraw from the given account and starts a transfer to the target account.
     Withdraw {
@@ -242,6 +242,7 @@ pub enum SessionCall {
     Transfer {
         amount: Amount,
         destination: Destination,
+        from: AccountOwner,
     },
 }
 

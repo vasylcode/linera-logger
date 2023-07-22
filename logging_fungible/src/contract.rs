@@ -66,7 +66,7 @@ impl Contract for LoggingFungibleToken {
                 self.check_account_authentication(None, context.authenticated_signer, owner).await?;
                 self.debit(owner, amount).await?;
                 Ok(self
-                    .finish_transfer_to_account(amount, target_account)
+                    .finish_transfer_to_account(amount, target_account, owner)
                     .await?)
             }
 
@@ -93,7 +93,7 @@ impl Contract for LoggingFungibleToken {
         message: Message,
     ) -> Result<ExecutionResult<Self::Message>, Self::Error> {
         let res = match message {
-            Message::Credit { owner, amount } => {
+            Message::Credit { owner, amount, from } => {
                 info!("{}", amount);
                 self.credit(owner, amount).await;
                 Ok(ExecutionResult::default())
@@ -106,7 +106,7 @@ impl Contract for LoggingFungibleToken {
                 self.check_account_authentication(None, context.authenticated_signer, owner).await?;
                 self.debit(owner, amount).await?;
                 Ok(self
-                    .finish_transfer_to_account(amount, target_account)
+                    .finish_transfer_to_account(amount, target_account, owner)
                     .await?)
             }
         };
@@ -141,7 +141,7 @@ impl Contract for LoggingFungibleToken {
                 ).await?;
                 self.debit(owner, amount).await?;
                 Ok(self
-                    .finish_transfer_to_destination(amount, destination)
+                    .finish_transfer_to_destination(amount, destination, owner)
                     .await?)
             }
 
@@ -178,8 +178,9 @@ impl Contract for LoggingFungibleToken {
             SessionCall::Transfer {
                 amount,
                 destination,
+                from,
             } => {
-                self.handle_session_transfer(state, amount, destination)
+                self.handle_session_transfer(state, amount, destination, from)
                     .await
             }
         }
@@ -236,6 +237,7 @@ impl LoggingFungibleToken {
         mut balance: Amount,
         amount: Amount,
         destination: Destination,
+        from: AccountOwner,
     ) -> Result<SessionCallResult<Message, Amount, Amount>, Error> {
         balance
             .try_sub_assign(amount)
@@ -245,7 +247,7 @@ impl LoggingFungibleToken {
 
         Ok(SessionCallResult {
             inner: self
-                .finish_transfer_to_destination(amount, destination)
+                .finish_transfer_to_destination(amount, destination, from)
                 .await?,
             new_state: updated_session,
         })
@@ -261,7 +263,7 @@ impl LoggingFungibleToken {
         if source_account.chain_id == system_api::current_chain_id() {
             self.debit(source_account.owner, amount).await?;
             Ok(self
-                .finish_transfer_to_account(amount, target_account)
+                .finish_transfer_to_account(amount, target_account, source_account.owner)
                 .await?)
         } else {
             let message = Message::Withdraw {
@@ -279,11 +281,12 @@ impl LoggingFungibleToken {
         &mut self,
         amount: Amount,
         destination: Destination,
+        from: AccountOwner,
     ) -> Result<ApplicationCallResult<Message, Amount, Amount>, Error> {
         let mut result = ApplicationCallResult::default();
         match destination {
             Destination::Account(account) => {
-                result.execution_result = self.finish_transfer_to_account(amount, account).await?;
+                result.execution_result = self.finish_transfer_to_account(amount, account, from).await?;
             }
             Destination::NewSession => {
                 result.create_sessions.push(amount);
@@ -297,6 +300,7 @@ impl LoggingFungibleToken {
         &mut self,
         amount: Amount,
         account: Account,
+        from: AccountOwner,
     ) -> Result<ExecutionResult<Message>, Error> {
         if account.chain_id == system_api::current_chain_id() {
             self.credit(account.owner, amount).await;
@@ -305,6 +309,7 @@ impl LoggingFungibleToken {
             let message = Message::Credit {
                 owner: account.owner,
                 amount,
+                from,
             };
             Ok(ExecutionResult::default().with_message(account.chain_id, message))
         }
