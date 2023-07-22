@@ -1,0 +1,30 @@
+var index = 0;
+const initializations = data.log
+	.filter((logItem) => logItem.logType === "INITIALIZATION_END")
+	.reduce((accum, logItem) => {
+		if (logItem.blockHeight == accum.length) {
+			accum.push([]);
+		}
+		accum[logItem.blockHeight].push((logItem.appName, index));
+                index += 1;
+	}, []);
+index = 0;
+const operations = data.log
+	.filter((logItem) => logItem.logType === "OPERATION_EXECUTION_END")
+	.reduce((accum, logItem) => {
+		if (logItem.blockHeight == accum.length) {
+			accum.push([]);
+		}
+		accum[logItem.blockHeight].push((logItem.appName + ": " + logItem.log.split(' ')[0], index));
+                index += 1;
+	}, []);
+index = 0;
+const messages = data.log
+	.filter((logItem) => logItem.logType === "MESSAGE_EXECUTION_END")
+	.reduce((accum, logItem) => {
+		if (logItem.blockHeight == accum.length) {
+			accum.push([]);
+		}
+		accum[logItem.blockHeight].push((logItem.appName + ": " + logItem.log.split(' ')[0], index));
+		index += 1;
+	}, []);
