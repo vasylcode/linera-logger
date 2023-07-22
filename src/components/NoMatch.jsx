@@ -11,7 +11,7 @@ export default function NoMatch() {
 	};
 
 	const handleButtonClick = () => {
-		navigate(`/${inputValue}`);
+		navigate(`/${inputValue}/explorer`);
 	};
 
 	return (
