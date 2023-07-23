@@ -1,5 +1,5 @@
 export default function Table({ transactions }) {
-	console.log("Tsx", transactions);
+	// console.log("Tsx", transactions);
 
 	const convertTimestampToUTCDate = (timestamp) => {
 		const dateObj = new Date(timestamp / 1000);
@@ -15,6 +15,12 @@ export default function Table({ transactions }) {
 		return dateObj.toLocaleString("en-US", options);
 	};
 
+	function formatHash(hash) {
+		const first8Chars = hash.slice(0, 8);
+		const last8Chars = hash.slice(-8);
+		return `${first8Chars}...${last8Chars}`;
+	}
+
 	return (
 		// max-w-[50%]
 		<div className="">
@@ -24,7 +30,10 @@ export default function Table({ transactions }) {
 					<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 						<tr>
 							<th scope="col" className="px-6 py-3">
-								Txn Hash
+								Chain
+							</th>
+							<th scope="col" className="px-6 py-3">
+								Amount
 							</th>
 							<th scope="col" className="px-6 py-3">
 								Block
@@ -41,9 +50,9 @@ export default function Table({ transactions }) {
 						</tr>
 					</thead>
 					<tbody>
-						{transactions.map((tx) => (
+						{transactions.map((tx, index) => (
 							<tr
-								key={tx}
+								key={tx.log.amount + tx.timestamp + tx.block}
 								className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
 							>
 								<th
@@ -51,9 +60,14 @@ export default function Table({ transactions }) {
 									className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
 								>
 									<a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-										{tx.log.chain}
+										{formatHash(tx.log.chain)}
 									</a>
 								</th>
+								<td className="px-6 py-4">
+									<a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+										{tx.log.amount}
+									</a>
+								</td>
 								<td className="px-6 py-4">
 									<a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
 										{tx.block}
@@ -62,12 +76,12 @@ export default function Table({ transactions }) {
 								<td className="px-6 py-4">{convertTimestampToUTCDate(tx.timestamp)}</td>
 								<td className="px-6 py-4">
 									<a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-										{tx.log.from}
+										{formatHash(tx.log.from)}
 									</a>
 								</td>
 								<td className="px-6 py-4">
 									<a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-										{tx.log.to}
+										{formatHash(tx.log.to)}
 									</a>
 								</td>
 							</tr>

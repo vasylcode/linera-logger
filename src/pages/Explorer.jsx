@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { gql, useLazyQuery, useSubscription } from "@apollo/client";
+import { gql, useLazyQuery } from "@apollo/client";
 import { Search, Table, Metrics } from "../components";
 
 const GET_LOG = gql`
@@ -23,7 +23,7 @@ export default function Explorer() {
 				.map((logItem) => {
 					const { blockHeight, timestamp, log } = logItem;
 					if (logItem.appName === "logging_fungible" && logItem.logType === "OPERATION_EXECUTION_END") {
-						const parsedLog = extractData(log);
+						const parsedLog = parseTransferString(log);
 						return { block: blockHeight, timestamp, log: parsedLog };
 					}
 					return null;
@@ -34,55 +34,42 @@ export default function Explorer() {
 		},
 	});
 
-	function extractData(inputString) {
-		function parseObject(objString) {
-			const keyValuePairs = objString.split(",").map((pair) => pair.trim());
-			const result = {};
-			for (const pair of keyValuePairs) {
-				const [key, value] = pair.split(":").map((item) => item.trim());
-				if (key === "owner") {
-					result.owner = value.match(/Owner\(([^)]+)\)/)[1];
-				} else {
-					result[key] = Number(value);
-				}
-			}
-			return result;
+	function parseTransferString(inputString) {
+		const ownerPattern = /owner:\sUser\(([a-f0-9]+)\)/;
+		const amountPattern = /amount:\sAmount\((\d+)\)/;
+		const chainIdPattern = /chain_id:\s([a-f0-9]+)/;
+		const toOwnerPattern = /target_account:\sAccount\s{\schain_id:\s[a-f0-9]+,\sowner:\sUser\(([a-f0-9]+)\)/;
+		const ownerMatch = inputString.match(ownerPattern);
+		const amountMatch = inputString.match(amountPattern);
+		const chainIdMatch = inputString.match(chainIdPattern);
+		const toOwnerMatch = inputString.match(toOwnerPattern);
+
+		if (!ownerMatch || !amountMatch || !chainIdMatch || !toOwnerMatch) {
+			throw new Error("Invalid input string. Unable to parse the required fields.");
 		}
-
-		const cleanedString = inputString.replace(/(Transfer|Credit)/g, "").trim();
-
-		const ownerRegex = /Owner\(([a-fA-F0-9]+)\)/;
-		const ownerMatch = cleanedString.match(ownerRegex);
-		const owner = ownerMatch ? ownerMatch[1] : "";
-
-		const amountRegex = /Amount\((\d+)\)/;
-		const amountMatch = cleanedString.match(amountRegex);
-		const amount = amountMatch ? amountMatch[1] : "";
-
-		const targetAccountRegex = /target_account: Account {([^}]+)}/;
-		const targetAccountMatch = cleanedString.match(targetAccountRegex);
-		const targetAccount = targetAccountMatch ? parseObject(targetAccountMatch[1]).owner : null;
-
-		const chainIdRegex = /chain_id: ([a-fA-F0-9]+)/;
-		const chainIdMatch = cleanedString.match(chainIdRegex);
-		const chain_id = chainIdMatch ? chainIdMatch[1] : "";
-
-		return {
-			from: owner,
-			amount: Number(amount / 1000000000000000000),
-			to: targetAccount,
-			chain: chain_id,
+		const result = {
+			from: ownerMatch[1],
+			to: toOwnerMatch[1],
+			chain: chainIdMatch[1],
+			amount: parseInt(amountMatch[1]) / 1000000000000000000,
 		};
+
+		return result;
 	}
 
-	// const inputString =
-	// 	"Transfer { owner: User(Owner(66ab9895a79a2a2d)), amount: Amount(500000000000000000000), target_account: Account { chain_id: 1db1936dad071759, owner: User(Owner(3514941bc663828d)) } }";
-
-	// const extractedData = extractData(inputString);
-	// console.log(inputString);
-	// console.log(extractedData);
-
-	if (called && loading) return <p>Loading ...</p>;
+	if (called && loading) {
+		return (
+			<div role="status" class="max-w-7xl mx-auto py-8 mt-4 animate-pulse">
+				<div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+				<div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+				<div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+				<div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+				<div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+				<div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+				<span class="sr-only">Loading...</span>
+			</div>
+		);
+	}
 	if (!called) {
 		void loadLog();
 	}
