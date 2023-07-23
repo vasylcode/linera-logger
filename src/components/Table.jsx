@@ -64,17 +64,10 @@ export default function Table({ transactions }) {
 										{formatHash(tx.log.chain)}
 									</a>
 								</th>
+								<td className="px-6 py-4">{tx.log.amount}</td>
 								<td className="px-6 py-4">
 									<a
-										href={`#${tx.log.amount}`}
-										className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-									>
-										{tx.log.amount}
-									</a>
-								</td>
-								<td className="px-6 py-4">
-									<a
-										href={`#${tx.log.block}`}
+										href={`#${tx.block}`}
 										className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
 									>
 										{tx.block}
