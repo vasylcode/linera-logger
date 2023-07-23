@@ -1,6 +1,4 @@
 export default function Table({ transactions }) {
-	// console.log("Tsx", transactions);
-
 	const convertTimestampToUTCDate = (timestamp) => {
 		const dateObj = new Date(timestamp / 1000);
 		const options = {
@@ -59,28 +57,43 @@ export default function Table({ transactions }) {
 									scope="row"
 									className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
 								>
-									<a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+									<a
+										href={`#${tx.log.chain}`}
+										className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+									>
 										{formatHash(tx.log.chain)}
 									</a>
 								</th>
 								<td className="px-6 py-4">
-									<a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+									<a
+										href={`#${tx.log.amount}`}
+										className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+									>
 										{tx.log.amount}
 									</a>
 								</td>
 								<td className="px-6 py-4">
-									<a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+									<a
+										href={`#${tx.log.block}`}
+										className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+									>
 										{tx.block}
 									</a>
 								</td>
 								<td className="px-6 py-4">{convertTimestampToUTCDate(tx.timestamp)}</td>
 								<td className="px-6 py-4">
-									<a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+									<a
+										href={`#${tx.log.from}`}
+										className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+									>
 										{formatHash(tx.log.from)}
 									</a>
 								</td>
 								<td className="px-6 py-4">
-									<a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+									<a
+										href={`#${tx.log.to}`}
+										className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+									>
 										{formatHash(tx.log.to)}
 									</a>
 								</td>
