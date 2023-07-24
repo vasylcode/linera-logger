@@ -117,8 +117,15 @@ read
 
 PORT_1=8080
 PORT_2=8081
-
-xdg-open "http://localhost:3000/$FUNGIBLE_APPLICATION_ID?owner=$WALLET_ONE_DEFAULT_OWNER&port=$PORT_1"
-xdg-open "http://localhost:3000/$FUNGIBLE_APPLICATION_ID?owner=$WALLET_TWO_DEFAULT_OWNER&port=$PORT_2"
+LOGGER_PORT=3000
+FUNGIBLE_PORT=3001
+echo "logger frontend, wallet 1"
+xdg-open "http://localhost:$LOGGER_PORT/$LOGGER_APPLICATION_ID?owner=$WALLET_ONE_DEFAULT_OWNER&port=$PORT_1"
+echo "logger frontend, wallet 2"
+xdg-open "http://localhost:$LOGGER_PORT/$LOGGER_APPLICATION_ID?owner=$WALLET_TWO_DEFAULT_OWNER&port=$PORT_2"
+echo "fungible frontend, wallet 1"
+xdg-open "http://localhost:$FUNGIBLE_PORT/$FUNGIBLE_APPLICATION_ID?owner=$WALLET_ONE_DEFAULT_OWNER&port=$PORT_1"
+echo "fungible frontend, wallet 2"
+xdg-open "http://localhost:$FUNGIBLE_PORT/$FUNGIBLE_APPLICATION_ID?owner=$WALLET_TWO_DEFAULT_OWNER&port=$PORT_2"
 
 read
