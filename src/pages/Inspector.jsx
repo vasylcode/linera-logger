@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { gql, useLazyQuery } from "@apollo/client";
+import { Accordion } from "@mantine/core";
 
 const GET_LOG = gql`
 	query {
@@ -20,10 +21,11 @@ const GET_LOG = gql`
 
 export default function Inspector() {
 	const [events, setEvents] = useState([]);
+	const [index, setIndex] = useState(0);
 
 	console.log(events);
 
-	let [loadLog, { called, loading }] = useLazyQuery(GET_LOG, {
+	let [loadLog, { called, loading, data: logData }] = useLazyQuery(GET_LOG, {
 		onCompleted: (data) => {
 			const events = data.log
 				.map((logItem, index) => {
@@ -54,20 +56,38 @@ export default function Inspector() {
 		void loadLog();
 	}
 
-	// const contentData = [
-	// 	{ id: 0, title: "Content 0", content: "This is the content for Button 0." },
-	// 	{ id: 7, title: "Content 7", content: "This is the content for Button 7." },
-	// 	{ id: 9, title: "Content 9", content: "This is the content for Button 9." },
-	// 	{ id: 10, title: "Content 10", content: "This is the content for Button 10." },
-	// ];
+	const setIndexFunc = (e) => {
+		console.log(e.currentTarget.getAttribute("ind"));
+		setIndex(e.currentTarget.getAttribute("ind"));
+	};
 
-	// const [activeButton, setActiveButton] = useState(0);
-
-	// const handleButtonClick = (buttonId) => {
-	// 	setActiveButton(buttonId);
-	// };
-
-	// const activeButtonContent = contentData.find((data) => data.id === activeButton);
+	logData &&
+		logData.log
+			.slice(+index)
+			.map((item, i) => (
+				<blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400" key={i}>
+					<p>
+						{item.appName +
+							" " +
+							item.logType +
+							(item.logType[0] === "I"
+								? ""
+								: `: ${item.logType[0] === "F" ? item.functionName : item.log.split(" ")[0]}`)}
+					</p>
+				</blockquote>
+			))
+			.concat(
+				logData.log[index].logType.split("_")[0] === logData.log[+index].logType.split("_")[0]
+					? []
+					: [
+							<blockquote
+								className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400"
+								key="error"
+							>
+								<p> Something went wrong </p>
+							</blockquote>,
+					  ]
+			);
 
 	if (called && loading) {
 		return (
@@ -85,17 +105,14 @@ export default function Inspector() {
 
 	return (
 		<div className="flex flex-1 max-w-7xl mx-auto py-83we">
-			{/* <LeftSidebar events={events} activeButton={activeButton} handleButtonClick={handleButtonClick} /> */}
-			<LeftSidebar events={events} />
+			<LeftSidebar events={events} setIndex={setIndexFunc} />
 			<Divider />
-			{/* <RightContent activeButtonContent={activeButtonContent} /> */}
-			<RightContent />
+			{logData && <RightContent log={logData.log} index={index} />}
 		</div>
 	);
 }
 
-// const LeftSidebar = ({ events, activeButton, handleButtonClick }) => {
-const LeftSidebar = ({ events }) => {
+const LeftSidebar = ({ events, setIndex }) => {
 	return (
 		<div className="w-1/4 overflow-y-auto h-screen overflow-hidden my-8 mx-6">
 			<div className="flex flex-col mr-5">
@@ -108,7 +125,8 @@ const LeftSidebar = ({ events }) => {
 							<div className="flex flex-1">
 								<button
 									type="button"
-									// onClick={() => handleButtonClick(event.index)}
+									ind={event.index}
+									onClick={(e) => setIndex(e)}
 									className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
 								>
 									{event.name}
@@ -125,18 +143,43 @@ const LeftSidebar = ({ events }) => {
 	);
 };
 
-// const RightContent = ({ activeButtonContent }) => {
-// 	return (
-// 		<div className="w-3/4 mx-6 my-8 h-screen">
-// 			<h2 className="text-2xl font-semibold mb-4">{activeButtonContent.title}</h2>
-// 			<p>{activeButtonContent.content}</p>
-// 		</div>
-// 	);
-// };
-const RightContent = () => {
+const RightContent = ({ log, index }) => {
+	/* eslint eqeqeq: 0 */
+	let list = [];
+	for (let i = +index; ; i += 1) {
+		list.push(
+			<Accordion.Item value={i.toString()}>
+				<Accordion.Control>
+					{log[i].appName +
+						" " +
+						log[i].logType +
+						(log[i].logType[0] === "I"
+							? ""
+							: ": " + (log[i].logType[0] === "F" ? log[i].functionName : log[i].log.split(" ")[0]))}
+				</Accordion.Control>
+				<Accordion.Panel>{log[i].log}</Accordion.Panel>
+			</Accordion.Item>
+		);
+		if (index != i && log[index].logType.split("_")[0] == log[i].logType.split("_")[0]) {
+			break;
+		}
+		if (
+			index != i &&
+			(log[i].logType.split("_")[0] == "OPERATION" ||
+				log[i].logType.split("_")[0] == "MESSAGE" ||
+				log[i].logType.split("_")[0] == "INITIALIZATION")
+		) {
+			list.push(
+				<blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
+					<p>Something went wrong</p>
+				</blockquote>
+			);
+			break;
+		}
+	}
 	return (
 		<div className="w-3/4 mx-6 my-8 h-screen">
-			<p>To be continued...</p>
+			<Accordion>{list}</Accordion>
 		</div>
 	);
 };
