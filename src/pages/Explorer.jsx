@@ -10,6 +10,7 @@ const GET_LOG = gql`
 			timestamp
 			appName
 			blockHeight
+			otherChain
 		}
 	}
 `;
@@ -28,9 +29,13 @@ export default function Explorer() {
 		onCompleted: (data) => {
 			const transactions = data.log
 				.map((logItem) => {
-					const { blockHeight, timestamp, log } = logItem;
+					const { log, blockHeight, timestamp, otherChain } = logItem;
 					if (logItem.appName === "logging_fungible" && logItem.logType === "OPERATION_EXECUTION_END") {
 						const parsedLog = parseTransaction(log);
+						return { block: blockHeight, timestamp, log: parsedLog };
+					} else if (logItem.appName === "logging_fungible" && logItem.logType === "MESSAGE_EXECUTION_END") {
+						const parsedLog = parseCreditString(log);
+						parsedLog.chain = otherChain;
 						return { block: blockHeight, timestamp, log: parsedLog };
 					}
 					return null;
@@ -64,9 +69,34 @@ export default function Explorer() {
 		return result;
 	}
 
+	function parseCreditString(string) {
+		const ownerPattern = /owner:\sUser\(([a-f0-9]+)\)/;
+		const amountPattern = /amount:\sAmount\((\d+)\)/;
+		const fromOwnerPattern = /from:\sUser\(([a-f0-9]+)\)/;
+
+		const ownerMatch = string.match(ownerPattern);
+		const amountMatch = string.match(amountPattern);
+		const fromOwnerMatch = string.match(fromOwnerPattern);
+
+		if (!ownerMatch || !amountMatch || !fromOwnerMatch) {
+			throw new Error("Invalid Credit string. Unable to parse the required fields.");
+		}
+
+		const result = {
+			from: fromOwnerMatch[1],
+			to: ownerMatch[1],
+			amount: parseInt(amountMatch[1]) / 1000000000000000000,
+		};
+
+		return result;
+	}
+
 	function parseMetrics(data) {
 		const totalTx = Object.values(data).filter((item) => {
-			return item.log.includes("Transfer") && item.logType === "OPERATION_EXECUTION_END";
+			return (
+				(item.log.includes("Credit") || item.log.includes("Transfer")) &&
+				(item.logType === "OPERATION_EXECUTION_END" || item.logType === "MESSAGE_EXECUTION_END")
+			);
 		});
 
 		const lastTxBlock = totalTx.reduce((acc, item) => {

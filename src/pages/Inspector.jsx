@@ -23,8 +23,6 @@ export default function Inspector() {
 	const [events, setEvents] = useState([]);
 	const [index, setIndex] = useState(0);
 
-	console.log(events);
-
 	let [loadLog, { called, loading, data: logData }] = useLazyQuery(GET_LOG, {
 		onCompleted: (data) => {
 			const events = data.log
@@ -57,7 +55,6 @@ export default function Inspector() {
 	}
 
 	const setIndexFunc = (e) => {
-		console.log(e.currentTarget.getAttribute("ind"));
 		setIndex(e.currentTarget.getAttribute("ind"));
 	};
 
@@ -148,7 +145,7 @@ const RightContent = ({ log, index }) => {
 	let list = [];
 	for (let i = +index; ; i += 1) {
 		list.push(
-			<Accordion.Item value={i.toString()}>
+			<Accordion.Item key={i.toString()} value={i.toString()}>
 				<Accordion.Control>
 					{log[i].appName +
 						" " +
