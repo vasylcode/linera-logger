@@ -145,8 +145,8 @@ const RightContent = ({ log, index }) => {
 	let list = [];
 	for (let i = +index; ; i += 1) {
 		list.push(
-			<Accordion.Item key={i.toString()} value={i.toString()}>
-				<Accordion.Control>
+			<Accordion.Item key={i.toString()} value={i.toString()} className="dark:text-white">
+				<Accordion.Control className="dark:text-white dark:hover:bg-gray-700">
 					{log[i].appName +
 						" " +
 						log[i].logType +
@@ -167,7 +167,7 @@ const RightContent = ({ log, index }) => {
 				log[i].logType.split("_")[0] == "INITIALIZATION")
 		) {
 			list.push(
-				<blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
+				<blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-white">
 					<p>Something went wrong</p>
 				</blockquote>
 			);
